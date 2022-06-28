@@ -1,0 +1,59 @@
+.container{
+    height: 80px;
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .leftNav{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        margin-left: 100px;
+
+        div{
+            padding: 7px;
+            padding-top: 25px;
+            height: 100%;
+        }
+
+        .selected{
+            border-bottom: 1px solid #5ECE7B;
+            color: #5ECE7B;
+        }
+    }
+
+    .logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .rightNav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 100px;
+        position: relative;
+
+        .selectedCurrency{
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .currencyPopUp{
+            width: 88px;
+            position: absolute;
+            bottom: -106px;
+            right: -30px;
+
+            li{
+                padding: 7px;
+                margin: 3px;
+            }
+        }
+    }
+}
