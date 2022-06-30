@@ -30,6 +30,7 @@ class NavBar extends Component {
   render() {
     return (
       <div className={styles.container}>
+       {this.state.selectOpened && <div onClick={this.onClickHandler.bind(this)} className={styles.currencyOverlay}> </div> }
         <div className={styles.leftNav}>
           <div className={styles.selected}>WOMEN</div>
           <div>MEN</div>
@@ -44,7 +45,7 @@ class NavBar extends Component {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g clip-path="url(#clip0_150_357)">
+            <g clipPath="url(#clip0_150_357)">
               <path
                 d="M34.0222 28.6646C34.0494 28.983 33.8009 29.2566 33.4846 29.2566H7.46924C7.15373 29.2566 6.90553 28.9843 6.93156 28.6665L8.7959 5.91227C8.8191 5.62962 9.05287 5.41211 9.33372 5.41211H31.5426C31.8226 5.41211 32.0561 5.62853 32.0801 5.91036L34.0222 28.6646Z"
                 fill="#1DCF65"
@@ -71,8 +72,8 @@ class NavBar extends Component {
                 y2="9.9008"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#52D67A" />
-                <stop offset="1" stop-color="#5AEE87" />
+                <stop stopColor="#52D67A" />
+                <stop offset="1" stopColor="#5AEE87" />
               </linearGradient>
               <clipPath id="clip0_150_357">
                 <rect
@@ -89,6 +90,7 @@ class NavBar extends Component {
         <div className={styles.rightNav}>
 
           <div className={styles.selectedCurrency} onClick={this.onClickHandler.bind(this)}>{this.state.currencySelected}</div>
+
           {this.state.selectOpened && (
             <div className={styles.currencyPopUp}>
               <ul>

@@ -15,10 +15,10 @@ class Category extends Component {
             <div className={styles.productsContainer}>
             <ProductCard />
             <ProductCard />
-            <ProductCard selected/>
             <ProductCard />
+            <ProductCard discount={'-50%'}/>
             <ProductCard />
-            <ProductCard />
+            <ProductCard outOfStock/>
             </div>
             </>
         )

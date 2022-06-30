@@ -30,7 +30,7 @@
     }
 
     &:hover {
-        box-shadow: 1px 5px 15px 3px rgba(0,0,0,0.36);
+        box-shadow: 1px 5px 15px 3px rgba(0,0,0,0.36); 
     }
 
     .cartIcon {
@@ -39,8 +39,40 @@
         right: 15px;
     }
 
-    .selected{
-       background-color: red;
-       color: red;
+    .heart{
+        position: absolute;
+        top: 25px;
+        right: 25px;
     }
+
+    .outOfStock{
+        position: absolute;
+        background-color: rgba(255, 255, 255, 70%);
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #8D8F9A;
+        font-family: Raleway;
+        font-size: 24px;
+    }
+
+    .discount{
+        background-color: #5ECE7B;
+        height: 35px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top:25px;
+        left: 15px;
+        font-family: Raleway;
+        font-size: 12px;
+        color: white;
+        font-weight: 500;
+    }
+
+
 }
