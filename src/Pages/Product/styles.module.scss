@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;600;700&family=Roboto+Condensed:wght@700&display=swap');
+
+.container{
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+
+    .sideImages{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        img{
+            width: 80px;
+            margin-bottom: 40px;
+            margin-right: 40px;
+            cursor: pointer;
+        }
+
+    }
+
+    .infoContainer{
+        display: flex;
+        flex-direction: row;
+        width: 70%;
+
+        .mainImage{
+            height: 511px;
+            // width: 100%;
+            margin-right: 100px;
+        }
+
+        .productInfo{
+            font-family: Raleway;
+            width: 29%;
+
+            h1{
+                font-size: 30px; 
+                font-weight: 600;
+                margin: 0;
+                margin-bottom: 15px;
+            }
+            h2{
+                font-weight: 400;
+                font-size: 30px;
+                margin-bottom: 40px;
+            }
+
+            h3{
+                font-family: 'Roboto Condensed';
+                font-size: 18px;
+                margin-bottom: 8px;
+
+            }
+
+            .size{
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 25px;
+
+                div{
+                    width: 60px;
+                    height: 45px;
+                    border: 1px solid black;
+                    margin-right: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+            }
+
+            .color{
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 35px;
+
+
+                div{
+                    height: 32px;
+                    width: 32px;
+                    margin-right: 10px;
+                    cursor: pointer;
+                }
+
+                .gray{
+                    background-color: gray;
+                }
+
+                .black{
+                    background-color: black;
+                }
+
+                .green{
+                    background-color: green;
+                }
+
+            }
+
+            .price{
+                margin-bottom: 20px;
+
+                p{
+                    font-family: Raleway;
+                    font-weight: 700;
+                }
+            }
+
+            .addToCartBtn{
+                margin-bottom: 40px;
+                background-color: rgba(94, 206, 123, 1);
+                color: white;
+                font-family: Raleway;
+                font-weight: 600;
+                width: 100%;
+                padding: 16px 32px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .description{
+                font-family: Roboto;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 25px;
+            }
+        }
+    }
+}
