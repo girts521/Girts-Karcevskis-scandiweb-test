@@ -7,6 +7,7 @@ import {Component} from 'react'
 import Category from './Pages/Category/Category';
 import NavBar from './Components/NavBar/NavBar';
 import Product from './Pages/Product/Product';
+import Cart from './Pages/Cart/Cart'
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
       <Routes>
          <Route path="/" element={<Category />} />
          <Route path="/product" element={<Product />} />
+         <Route path="/cart" element={<Cart />} />
       </Routes>
       </>
     );
