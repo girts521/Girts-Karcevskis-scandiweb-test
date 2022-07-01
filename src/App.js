@@ -8,12 +8,14 @@ import Category from './Pages/Category/Category';
 import NavBar from './Components/NavBar/NavBar';
 import Product from './Pages/Product/Product';
 import Cart from './Pages/Cart/Cart'
+import CartOverlay from './Pages/CartOverlay/CartOverlay';
 
 class App extends Component {
   render() {
     return (
       <>
       <NavBar />
+      <CartOverlay />
       <Routes>
          <Route path="/" element={<Category />} />
          <Route path="/product" element={<Product />} />
