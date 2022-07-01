@@ -1,6 +1,10 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
 
+import Size from "../../Components/Size/Size";
+import Color from "../../Components/Color/Color";
+import GreenBtn from "../../Components/GreenBtn/GreenBtn";
+
 class Product extends Component {
   render() {
     return (
@@ -17,27 +21,17 @@ class Product extends Component {
           <div className={styles.productInfo}>
             <h1>Apollo</h1>
             <h2>Running Short</h2>
-            <h3>SIZE:</h3>
-            <div className={styles.size}>
-              <div>XS</div>
-              <div>S</div>
-              <div>M</div>
-              <div>L</div>
-            </div>
 
-            <h3>COLOR</h3>
-            <div className={styles.color}>
-              <div className={styles.gray}></div>
-              <div className={styles.black}></div>
-              <div className={styles.green}></div>
-            </div>
+          <Size sizes={['XS', 'S', 'M', 'L']} />
+
+          <Color colors={['gray', 'black', 'green']} />
 
             <div className={styles.price}>
               <h3>PRICE</h3>
               <p>$50.00</p>
             </div>
 
-            <div className={styles.addToCartBtn}>ADD TO CART</div>
+            <GreenBtn text={'ADD TO CART'} />
 
             <p className={styles.description}>
               Find stunning women's cocktail dresses and party dresses. Stand
