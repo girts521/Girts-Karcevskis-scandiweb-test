@@ -1,0 +1,95 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+
+    .productsInfo {
+        width: 50%;
+      .sizes {
+        display: flex;
+        flex-direction: row;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        .size {
+          font-family: "Source Sans Pro";
+          font-size: 14px;
+          font-weight: 400;
+          height: 24px;
+          width: 24px;
+          background-color: white;
+          border: 1px solid black;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 8px;
+        }
+
+        .chosenSize {
+          background-color: black;
+          color: white;
+        }
+      }
+
+      .colors {
+        display: flex;
+        flex-direction: row;
+        margin-top: 8px;
+
+        div {
+          height: 20px;
+          width: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid black;
+          margin-right: 8px;
+        }
+
+        .gray {
+          background-color: gray;
+        }
+
+        .black {
+          background-color: black;
+        }
+
+        .green {
+          background-color: green;
+        }
+      }
+    }
+
+    .productsImg {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+
+        .controls{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-right: 8px;
+            font-family: Raleway;
+            font-weight: 500;
+            font-size: 16px;
+
+            .add, .remove{
+                width: 24px;
+                height: 24px;
+                border: 1px solid black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        img{
+            width: 85%;
+            // height: 100%;
+        }
+    }
+  }

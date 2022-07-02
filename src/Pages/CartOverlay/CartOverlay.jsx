@@ -2,6 +2,8 @@ import { Component } from "react";
 import CartItem from "../../Components/CartItem/CartItem";
 import Color from "../../Components/Color/Color";
 import Size from "../../Components/Size/Size";
+import CartOverlayItem from "../../Components/CartOverlayItem/CartOverlayItem";
+import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import styles from './styles.module.scss'
 
 class CartOverlay extends Component {
@@ -13,13 +15,25 @@ class CartOverlay extends Component {
             <h1>My bag</h1>
 
             <div className={styles.productsContainer}>
-                <h2>Apollo</h2>
-                <h2>Running Short</h2>
 
-                <h4>$50.00</h4>
+            <CartOverlayItem />
+            <CartOverlayItem />
+            <CartOverlayItem />
+            <CartOverlayItem />
+            <CartOverlayItem />
+            <CartOverlayItem />
+            </div>
 
-                <Size sizes={['XS', 'S', 'M', 'L']} />
-            <Color colors={['gray', 'black', 'green']} />
+            <div className={styles.total}>
+            <p>Total</p>
+            <p className={styles.totalPrice}>$200.00</p>
+            </div>
+
+            <div className={styles.btns}>
+                {/* <div className={styles.whiteBtn}>VIEW BAG</div> */}
+                <GreenBtn text={'VIEW BAG'} />
+                <GreenBtn text={'CHECK OUT'} />
+
             </div>
 
             </div>

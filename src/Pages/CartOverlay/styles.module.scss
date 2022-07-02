@@ -1,43 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro&display=swap");
 .container {
-    position: absolute;
-    background-color: red;
-    height: 80vh;
-    width: 25vw;
-    min-width: 350px;
-    right: 20px;
-    top: 85px;
-    z-index: 2;
+  position: absolute;
+  background-color: white;
+  max-height: 80vh;
+  width: 25vw;
+  min-width: 350px;
+  right: 20px;
+  top: 85px;
+  z-index: 2;
+  padding: 32px 16px;
+  overflow: scroll;
 
-    h1{
-        font-weight: 700;
-        font-size: 16px;
+  h1 {
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 300;
+    font-family: Raleway;
+    margin-top: 8px;
+  }
+
+  h3 {
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  h4 {
+    font-family: Raleway;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+
+  .productsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .total{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    p{
+      font-family: Roboto;
+      font-weight: 500;
+      font-size: 16px;
     }
 
-    h2{
-        font-size: 16px;
-        font-weight: 300;
-        font-family: Raleway;
+    .totalPrice{
+      font-family: Raleway;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+  }
+
+  .btns{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+
+    div:nth-child(1){
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+      margin-right: 12px;
     }
 
-    h3{
-        font-weight: 400;
-        font-size: 14px;
+    div{
+      margin: 0;
     }
 
-    h4{
-        font-family: Raleway;
-        font-weight: 500;
-        font-size: 16px;
+    // .whiteBtn{
+    //   width: 50%;
+    //   border: 1px solid black;
+    //   display: flex;
+    //   // justify-content: center;
+    //   // align-items: center;
+    //   padding: 16px 32px;
+    //   font-family: Raleway;
+    //   font-weight: 600;
+    // }
     }
 
-    .productsContainer{
-        width: 100%;
-
-        .size{
-            div{
-                height: 20px;
-                background-color: red;
-            }
-        }
-    }
 }
