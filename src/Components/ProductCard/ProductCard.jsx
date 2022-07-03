@@ -17,6 +17,10 @@ class ProductCard extends Component {
     this.setState({ cartVisible: false });
   }
 
+  componentDidMount() {
+    console.log(this.props.product)
+  }
+
   render() {
     return (
       <div
@@ -24,12 +28,12 @@ class ProductCard extends Component {
         onMouseLeave={this.hideCart.bind(this)}
         className={`${styles.container} `}
       >
-        {this.props.outOfStock && <div className={styles.outOfStock}>OUT OF STOCK</div>}
+        {this.props.product.inStock ? '' : <div className={styles.outOfStock}>OUT OF STOCK</div> }
         {this.props.discount && <div className={styles.discount}>{this.props.discount}</div>}
-        <img src="/Image.png" alt="" />
+        <img src={this.props.product.gallery[0]} alt="" />
         <div className={styles.text}>
-          <p className={styles.name}> Apollo Running Short</p>
-          <p className={styles.price}> $50.00</p>
+          <p className={styles.name}>{this.props.product.name}</p>
+          <p className={styles.price}> {this.props.product.prices[0].amount}</p>
         </div>
 
         {this.state.cartVisible && !this.props.outOfStock &&(

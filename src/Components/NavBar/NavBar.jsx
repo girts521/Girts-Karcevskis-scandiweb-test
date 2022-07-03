@@ -1,5 +1,6 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
+import CartOverlay from "../../Pages/CartOverlay/CartOverlay";
 
 class NavBar extends Component {
   constructor() {
@@ -7,7 +8,16 @@ class NavBar extends Component {
     this.state = {
       selectOpened: false,
       currencySelected: "$",
+      cartOpened: false
     };
+  }
+
+  openCloseCart() {
+    this.setState((curState) => {
+      return {
+        cartOpened: !curState.cartOpened,
+      };
+    });
   }
 
   onClickHandler() {
@@ -27,9 +37,14 @@ class NavBar extends Component {
     })
   }
 
+
+
   render() {
     return (
       <div className={styles.container}>
+       {this.state.cartOpened && <div onClick={this.openCloseCart.bind(this)}  className={styles.cartOverlay}></div>}
+       {this.state.cartOpened && <CartOverlay />}
+      
        {this.state.selectOpened && <div onClick={this.onClickHandler.bind(this)} className={styles.currencyOverlay}> </div> }
         <div className={styles.leftNav}>
           <div className={styles.selected}>WOMEN</div>
@@ -101,7 +116,8 @@ class NavBar extends Component {
               </ul>
             </div>
           )}
-          <svg
+          <svg 
+          onClick={this.openCloseCart.bind(this)} 
             width="20"
             height="20"
             viewBox="0 0 20 20"
