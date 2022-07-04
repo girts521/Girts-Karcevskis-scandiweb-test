@@ -17,10 +17,6 @@ class ProductCard extends Component {
     this.setState({ cartVisible: false });
   }
 
-  componentDidMount() {
-    console.log(this.props.product)
-  }
-
   render() {
     return (
       <div

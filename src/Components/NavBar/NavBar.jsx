@@ -1,6 +1,7 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
 import CartOverlay from "../../Pages/CartOverlay/CartOverlay";
+import {WithRouter} from '../../utils/withRouter'
 
 class NavBar extends Component {
   constructor() {
@@ -37,6 +38,16 @@ class NavBar extends Component {
     })
   }
 
+  navigateTo(e) {
+   console.log(e.target.parentNode.children.length)
+    for (let i = 0; i < e.target.parentNode.children.length; i++){
+      e.target.parentNode.children[i].className = ''
+      console.log( e.target.parentNode.children)
+    }
+   e.target.className = styles.selected
+    this.props.navigate(`/category/${e.target.innerText.toLowerCase()}`)
+  }
+
 
 
   render() {
@@ -47,9 +58,9 @@ class NavBar extends Component {
       
        {this.state.selectOpened && <div onClick={this.onClickHandler.bind(this)} className={styles.currencyOverlay}> </div> }
         <div className={styles.leftNav}>
-          <div className={styles.selected}>WOMEN</div>
-          <div>MEN</div>
-          <div>KIDS</div>
+          <div onClick={this.navigateTo.bind(this)} >ALL</div>
+          <div onClick={this.navigateTo.bind(this)}>TECH</div>
+          <div onClick={this.navigateTo.bind(this)} >CLOTHES</div>
         </div>
 
         <div className={styles.logo}>
@@ -143,4 +154,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default WithRouter(NavBar);

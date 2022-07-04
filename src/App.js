@@ -9,6 +9,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import Product from "./Pages/Product/Product";
 import Cart from "./Pages/Cart/Cart";
 import CartOverlay from "./Pages/CartOverlay/CartOverlay";
+import {WithRouter} from './utils/withRouter'
 
 class App extends Component {
   render() {

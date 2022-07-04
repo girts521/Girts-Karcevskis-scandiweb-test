@@ -1,76 +1,66 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
+import { WithRouter } from "../../utils/withRouter";
 
 import { gql } from "apollo-boost";
 import { Query } from "@apollo/client/react/components";
 
 import ProductCard from "../../Components/ProductCard/ProductCard";
 
-const productsQuery = gql`
-query {
-	category (input: {title: ""})
-  {
-	name
-    products{
-      id
-      name
-      inStock
-      gallery
-      prices{
-        currency{
-          label
-          symbol
-        }
-        amount
-      }
-    }
-  }
-}
-`;
-
-
-
 class Category extends Component {
 
-
-    // componentDidMount() {
-    //     const { categoryName } = this.props.match.params
-    //     console.log('mounted', categoryName)
-
-    // }
-
-    test() {
-        console.log(this.props)
-    }
-
-
   render() {
-
     return (
       <>
-        <h1 onClick={this.test.bind(this)}>categoryName</h1>
+        <h1>
+          {this.props.params.categoryName
+            ? this.props.params.categoryName
+            : "All"}
+        </h1>
         <div className={styles.productsContainer}>
-          <Query query={productsQuery}>
+          <Query
+            query={gql`
+            query {
+              category(input: { title: "${
+                this.props.params.categoryName
+                  ? this.props.params.categoryName
+                  : ""
+              }" }) {
+                name
+                products {
+                  id
+                  name
+                  inStock
+                  gallery
+                  prices {
+                    currency {
+                      label
+                      symbol
+                    }
+                    amount
+                  }
+                }
+              }
+            }
+          `}
+          >
             {({ loading, data }) => {
               if (loading) return "Loading...";
-              if (data) {
-                console.log(data.category.products);
+              if (data.category) {
                 return data.category.products.map((product) => {
-                    return <ProductCard product={product} />
+                  return <ProductCard key={product.id} product={product} />;
                 });
+              }
+              if(!data.category){
+                //TODO: Style a propper error message 
+                return <h1>Sorry category not found</h1>
               }
             }}
           </Query>
-          {/* <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard discount={"-50%"} />
-          <ProductCard />
-          <ProductCard outOfStock /> */}
         </div>
       </>
     );
   }
 }
 
-export default Category;
+export default WithRouter(Category);
