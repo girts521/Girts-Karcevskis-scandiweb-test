@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { WithRouter } from "../../utils/withRouter";
 import styles from "./styles.module.scss";
 
 class ProductCard extends Component {
@@ -17,12 +18,17 @@ class ProductCard extends Component {
     this.setState({ cartVisible: false });
   }
 
+  navigateToProduct(){
+    this.props.navigate(`/product/${this.props.product.id}`)
+  }
+
   render() {
     return (
       <div
         onMouseEnter={this.showCart.bind(this)}
         onMouseLeave={this.hideCart.bind(this)}
         className={`${styles.container} `}
+        onClick={this.navigateToProduct.bind(this)}
       >
         {this.props.product.inStock ? '' : <div className={styles.outOfStock}>OUT OF STOCK</div> }
         {this.props.discount && <div className={styles.discount}>{this.props.discount}</div>}
@@ -116,4 +122,4 @@ class ProductCard extends Component {
   }
 }
 
-export default ProductCard;
+export default WithRouter(ProductCard);

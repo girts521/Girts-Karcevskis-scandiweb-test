@@ -6,12 +6,15 @@
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
+  height: 70vh;
 
   .sideImages {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
+    height: 100%;
+    overflow: scroll;
 
     img {
       width: 80px;
@@ -27,8 +30,10 @@
     width: 70%;
 
     .mainImage {
-      height: 511px;
+      // height: 511px;
       // width: 100%;
+      max-width: 40vw;
+      max-height: 70vh;
       margin-right: 100px; 
     }
 
