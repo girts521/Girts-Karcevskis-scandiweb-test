@@ -6,10 +6,10 @@ class Size extends Component {
     render() {
         return(
             <div className={styles.container}>
-            <h3>SIZE:</h3>
+            <h3>{this.props.name}</h3>
             <div className={styles.size}>
-            {this.props.sizes.map((size) => { 
-               return <div key={size}>{size}</div>
+            {this.props.items.map((item) => { 
+               return <div key={item}>{item}</div>
             })}
             </div>
             </div>

@@ -14,7 +14,7 @@ class CartItem extends Component {
 
             <div className={styles.price}>$50.00</div>
 
-            <Size sizes={['XS', 'S', 'M', 'L']} />
+            <Size name={'Size'} items={['XS', 'S', 'M', 'L']} />
             <Color colors={['gray', 'black', 'green']} />
             </div>
 

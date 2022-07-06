@@ -73,9 +73,14 @@ class Product extends Component {
                       <h1>{data.product.brand}</h1>
                       <h2>{data.product.name}</h2>
 
-                      <Size sizes={["XS", "S", "M", "L"]} />
-
-                      <Color colors={["gray", "black", "green"]} />
+                      {data.product.attributes && data.product.attributes.length && data.product.attributes.map((attr) => {
+                        if(attr.type === 'text'){
+                          console.log('text',attr)
+                        }
+                        else if(attr.type === 'swatch'){
+                          console.log('swatch',attr)
+                        }
+                      })}
 
                       <div className={styles.price}>
                         <h3>PRICE</h3>
