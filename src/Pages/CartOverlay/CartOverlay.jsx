@@ -1,7 +1,7 @@
 import { Component } from "react";
 import CartItem from "../../Components/CartItem/CartItem";
 import Color from "../../Components/Color/Color";
-import Size from "../../Components/Size/Size";
+import Size from "../../Components/Attribute/Attribute";
 import CartOverlayItem from "../../Components/CartOverlayItem/CartOverlayItem";
 import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import styles from './styles.module.scss'

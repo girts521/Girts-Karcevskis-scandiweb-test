@@ -1,7 +1,6 @@
 import { Component } from "react";
 import styles from './styles.module.scss'
-import Size from "../../Components/Size/Size";
-import Color from "../../Components/Color/Color";
+import Attribute from "../Attribute/Attribute";
 
 class CartItem extends Component {
 
@@ -14,8 +13,8 @@ class CartItem extends Component {
 
             <div className={styles.price}>$50.00</div>
 
-            <Size name={'Size'} items={['XS', 'S', 'M', 'L']} />
-            <Color colors={['gray', 'black', 'green']} />
+            <Attribute text name={'Size'} items={['XS', 'S', 'M', 'L']} />
+            <Attribute swatch name={'Colors'} items={['gray', 'black', 'green']} />
             </div>
 
             <div className={styles.productImg}>

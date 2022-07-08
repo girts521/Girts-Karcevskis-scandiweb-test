@@ -6,7 +6,7 @@ class GreenBtn extends Component {
     render() {
 
         return (
-            <div className={styles.btn}>{this.props.text}</div>
+            <div onClick={this.props.func} className={styles.btn}>{this.props.text}</div>
         )
     }
 }
