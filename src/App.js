@@ -10,8 +10,22 @@ import Product from "./Pages/Product/Product";
 import Cart from "./Pages/Cart/Cart";
 import CartOverlay from "./Pages/CartOverlay/CartOverlay";
 import {WithRouter} from './utils/withRouter'
+import { connect } from "react-redux";
+import {cartActions} from './store/cart'
+import {mapStateToProps} from './store/index'
 
 class App extends Component {
+
+  componentDidMount () {
+    const cart = JSON.parse(localStorage.getItem('cart'))
+    if(cart){
+      // cart.forEach(element => {
+      //   this.props.dispatch(cartActions.addToCart(element))
+      // });
+      this.props.dispatch(cartActions.setCart(cart))
+    }
+  }
+
   render() {
     return (
       <>
@@ -27,4 +41,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default  connect(mapStateToProps)(App);

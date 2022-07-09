@@ -30,7 +30,8 @@ class Product extends Component {
   addToCart() {
     this.props.dispatch(cartActions.addToCart({
       productId: this.props.params.productId,
-      attributes: this.state.attributes
+      attributes: this.state.attributes,
+      quantity: 1
     }))
     this.setState({attributes: []})
   }

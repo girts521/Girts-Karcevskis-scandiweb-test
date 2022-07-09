@@ -1,44 +1,90 @@
 import { Component } from "react";
-import styles from './styles.module.scss'
+import styles from "./styles.module.scss";
+import { gql } from "apollo-boost";
+import { Query } from "@apollo/client/react/components";
+import Attribute from '../Attribute/Attribute'
 
 class CartOverlayItem extends Component {
+  componentDidMount() {
+    console.log(this.props.product);
+  }
+
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.productsInfo}>
-          <h2>Apollo</h2>
-          <h2>Running Short</h2>
+        <Query
+          query={gql`
+            query {
+              product(id: "${this.props.product.productId}") {
+                name
+                brand
+                gallery
+                prices {
+                  currency {
+                    label
+                    symbol
+                  }
+                  amount
+                }
+              }
+            }
+          `}
+        >
+          {({ loading, data }) => {
+            if (loading) return "Loading...";
+            if (data.product) {
+              console.log(data.product);
+              return (
+                <>
+                  <div className={styles.productsInfo}>
+                    <h2>{data.product.brand}</h2>
+                    <h2>{data.product.name}</h2>
 
-          <h4>$50.00</h4>
+                    <h4>
+                      {data.product.prices[0].currency.symbol +
+                        data.product.prices[0].amount}
+                    </h4>
 
-          <p>SIZE:</p>
-          <div className={styles.sizes}>
-            <div className={`${styles.size} ${styles.chosenSize}`}>XS</div>
-            <div className={styles.size}>S</div>
-            <div className={styles.size}>M</div>
-            <div className={styles.size}>L</div>
-          </div>
+                    {this.props.product.attributes.length &&
+                      this.props.product.attributes.map((attr) => {
+                        if (attr.attrType === "text") {
+                          return (
+                            <div className={styles.attribute}>
+                             <Attribute text  name={attr.attrName} items={[{value: attr.attrValue, displayValue: attr.attrValue}]} />
+                            </div>
+                          );
+                        }
+                        if (attr.attrType === "swatch") {
+                          return (
+                            <>
+                             <Attribute swatch  name={attr.attrName} items={[{value: attr.attrValue, displayValue: attr.attrValue}]} />
+                            </>
+                          );
+                        }
+                      })}
 
-          <p>COLOR:</p>
-          <div className={styles.colors}>
-            <div className={styles.gray}></div>
-            <div className={styles.black}></div>
-            <div className={styles.green}></div>
-          </div>
-        </div>
+                    
+                  </div>
 
-        <div className={styles.productsImg}>
-          <div className={styles.controls}>
-            <div className={styles.add}>+</div>
-            <div className={styles.quantity}>1</div>
-            <div className={styles.remove}>-</div>
-          </div>
+                  <div className={styles.productsImg}>
+                    <div className={styles.controls}>
+                      <div className={styles.add}>+</div>
+                      <div className={styles.quantity}>
+                        {this.props.product.quantity}
+                      </div>
+                      <div className={styles.remove}>-</div>
+                    </div>
 
-          <img src="/Image.png" alt="" />
-        </div>
+                    <img src="/Image.png" alt="" />
+                  </div>
+                </>
+              );
+            }
+          }}
+        </Query>
       </div>
     );
   }
 }
 
-export default CartOverlayItem
+export default CartOverlayItem;

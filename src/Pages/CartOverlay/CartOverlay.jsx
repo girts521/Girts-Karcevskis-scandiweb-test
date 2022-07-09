@@ -6,7 +6,23 @@ import CartOverlayItem from "../../Components/CartOverlayItem/CartOverlayItem";
 import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import styles from './styles.module.scss'
 
+import { connect } from "react-redux";
+import {cartActions} from '../../store/cart'
+import {mapStateToProps} from '../../store/index'
+
 class CartOverlay extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+          cart: [],
+        };
+      }
+
+    componentDidMount() {
+        const storedCart = this.props.cart
+        this.setState({cart: storedCart})
+    }
 
     render() {
 
@@ -16,12 +32,12 @@ class CartOverlay extends Component {
 
             <div className={styles.productsContainer}>
 
-            <CartOverlayItem />
-            <CartOverlayItem />
-            <CartOverlayItem />
-            <CartOverlayItem />
-            <CartOverlayItem />
-            <CartOverlayItem />
+                {this.state.cart.length ? this.state.cart.map((item) => {
+                    return <CartOverlayItem key={item.productId + Math.random()} product={item} />
+                }) : 'Nothing'}
+
+           
+
             </div>
 
             <div className={styles.total}>
@@ -41,4 +57,4 @@ class CartOverlay extends Component {
     }
 }
 
-export default CartOverlay 
+export default connect(mapStateToProps)(CartOverlay); 

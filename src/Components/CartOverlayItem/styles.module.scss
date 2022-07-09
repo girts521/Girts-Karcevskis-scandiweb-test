@@ -8,6 +8,13 @@
 
     .productsInfo {
         width: 50%;
+
+        .attribute{
+          div{
+            padding: 0;
+          }
+        }
+
       .sizes {
         display: flex;
         flex-direction: row;
