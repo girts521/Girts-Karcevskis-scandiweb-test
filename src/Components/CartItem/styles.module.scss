@@ -6,6 +6,7 @@
     margin-bottom: 30px;
     padding-top: 30px;
     border-top: 1px solid rgba(229, 229, 229, 1);
+    height: 350px;
     .productDescription {
       h2 {
         font-weight: 600;
@@ -28,6 +29,38 @@
     .productImg{
         display: flex;
         flex-direction: row;
+        width: 30%;
+        height: 100%;
+        max-height: fit-content;
+        position: relative;
+
+        img{
+          width: 100%;
+        }
+
+        .arrows{
+          position: absolute;
+          bottom: 0;
+          right: 25px;
+          width: 70px;
+          height: 25px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            width: 25px;
+
+          }
+
+          .arrowRight{
+            transform: rotate(-180deg);
+          }
+        }
 
         .btns{
             display: flex;

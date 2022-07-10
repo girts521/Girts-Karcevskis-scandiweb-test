@@ -19,9 +19,6 @@ class App extends Component {
   componentDidMount () {
     const cart = JSON.parse(localStorage.getItem('cart'))
     if(cart){
-      // cart.forEach(element => {
-      //   this.props.dispatch(cartActions.addToCart(element))
-      // });
       this.props.dispatch(cartActions.setCart(cart))
     }
   }

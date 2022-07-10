@@ -5,9 +5,6 @@ import { Query } from "@apollo/client/react/components";
 import Attribute from '../Attribute/Attribute'
 
 class CartOverlayItem extends Component {
-  componentDidMount() {
-    console.log(this.props.product);
-  }
 
   render() {
     return (
@@ -17,7 +14,7 @@ class CartOverlayItem extends Component {
             query {
               product(id: "${this.props.product.productId}") {
                 name
-                brand
+                brand 
                 gallery
                 prices {
                   currency {
@@ -33,7 +30,6 @@ class CartOverlayItem extends Component {
           {({ loading, data }) => {
             if (loading) return "Loading...";
             if (data.product) {
-              console.log(data.product);
               return (
                 <>
                   <div className={styles.productsInfo}>
@@ -49,16 +45,16 @@ class CartOverlayItem extends Component {
                       this.props.product.attributes.map((attr) => {
                         if (attr.attrType === "text") {
                           return (
-                            <div className={styles.attribute}>
-                             <Attribute text  name={attr.attrName} items={[{value: attr.attrValue, displayValue: attr.attrValue}]} />
+                            <div key={attr.attrValue + Math.random()} className={styles.attribute}>
+                             <Attribute  text  name={attr.attrName} items={[{value: attr.attrValue, displayValue: attr.attrValue}]} />
                             </div>
                           );
                         }
                         if (attr.attrType === "swatch") {
                           return (
-                            <>
-                             <Attribute swatch  name={attr.attrName} items={[{value: attr.attrValue, displayValue: attr.attrValue}]} />
-                            </>
+                            
+                             <Attribute key={attr.attrValue + Math.random()} swatch  name={attr.attrName} items={[{value: attr.attrValue, displayValue: attr.attrValue}]} />
+                          
                           );
                         }
                       })}
