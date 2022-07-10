@@ -9,6 +9,7 @@ import styles from './styles.module.scss'
 import { connect } from "react-redux";
 import {cartActions} from '../../store/cart'
 import {mapStateToProps} from '../../store/index'
+import {WithRouter} from '../../utils/withRouter'
 
 class CartOverlay extends Component {
 
@@ -47,8 +48,8 @@ class CartOverlay extends Component {
 
             <div className={styles.btns}>
                 {/* <div className={styles.whiteBtn}>VIEW BAG</div> */}
-                <GreenBtn text={'VIEW BAG'} />
-                <GreenBtn text={'CHECK OUT'} />
+                <GreenBtn func={() => {this.props.navigate('/cart')}} text={'VIEW BAG'} />
+                <GreenBtn text={'CHECK OUT'} /> 
 
             </div>
 
@@ -57,4 +58,4 @@ class CartOverlay extends Component {
     }
 }
 
-export default connect(mapStateToProps)(CartOverlay); 
+export default connect(mapStateToProps)(WithRouter(CartOverlay)); 

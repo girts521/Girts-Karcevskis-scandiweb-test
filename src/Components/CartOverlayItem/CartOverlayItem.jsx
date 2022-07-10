@@ -75,7 +75,7 @@ class CartOverlayItem extends Component {
                       <div className={styles.remove}>-</div>
                     </div>
 
-                    <img src="/Image.png" alt="" />
+                    <img src={data.product.gallery[0]} alt="" />
                   </div>
                 </>
               );
