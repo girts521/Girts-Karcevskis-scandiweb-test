@@ -33,7 +33,7 @@ class CartOverlay extends Component {
 
             <div className={styles.productsContainer}>
 
-                {this.state.cart.length ? this.state.cart.map((item) => {
+                {this.state.cart.length ? this.props.cart.map((item) => {
                     return <CartOverlayItem key={item.productId + Math.random()} product={item} />
                 }) : 'Nothing'}
 

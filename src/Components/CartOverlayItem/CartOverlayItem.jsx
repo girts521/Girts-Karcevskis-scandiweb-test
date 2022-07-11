@@ -3,8 +3,20 @@ import styles from "./styles.module.scss";
 import { gql } from "apollo-boost";
 import { Query } from "@apollo/client/react/components";
 import Attribute from '../Attribute/Attribute'
+import { connect } from "react-redux";
+import {mapStateToProps} from '../../store/index'
+import {cartActions} from '../../store/cart'
+
+let foundProduct
 
 class CartOverlayItem extends Component {
+
+  changeQuantity(action){
+    this.props.dispatch(cartActions.changeQuantity({
+     id: this.props.product.id,
+     action: action
+    }))
+   }
 
   render() {
     return (
@@ -64,11 +76,11 @@ class CartOverlayItem extends Component {
 
                   <div className={styles.productsImg}>
                     <div className={styles.controls}>
-                      <div className={styles.add}>+</div>
+                      <div onClick={() => {this.changeQuantity('add')}} className={styles.add}>+</div>
                       <div className={styles.quantity}>
-                        {this.props.product.quantity}
+                      {this.props.product.quantity}
                       </div>
-                      <div className={styles.remove}>-</div>
+                      <div onClick={() => {this.changeQuantity('remove')}} className={styles.remove}>-</div>
                     </div>
 
                     <img src={data.product.gallery[0]} alt="" />
@@ -83,4 +95,4 @@ class CartOverlayItem extends Component {
   }
 }
 
-export default CartOverlayItem;
+export default connect(mapStateToProps)(CartOverlayItem);

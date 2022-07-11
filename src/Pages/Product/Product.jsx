@@ -29,6 +29,7 @@ class Product extends Component {
 
   addToCart() {
     this.props.dispatch(cartActions.addToCart({
+      id: this.props.params.productId + Math.random(),
       productId: this.props.params.productId,
       attributes: this.state.attributes,
       quantity: 1

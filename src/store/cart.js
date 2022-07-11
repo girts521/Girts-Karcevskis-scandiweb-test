@@ -7,6 +7,23 @@ const cartSlice = createSlice({
   initialState: initialCartState,
   reducers: {
 
+    changeQuantity(state, action){
+      const foundItem = state.cart.find((item) => item.id === action.payload.id)
+      if(action.payload.action === 'add'){
+        foundItem.quantity ++
+      }
+      if(action.payload.action === 'remove'){
+          if(foundItem.quantity === 1){
+           const index =  state.cart.indexOf(foundItem)
+           state.cart.splice(index, 1)
+          }else{
+            foundItem.quantity --
+          }
+      }
+
+      localStorage.setItem('cart', JSON.stringify(state.cart))
+    },
+
     setCart(state, action) {
       state.cart = action.payload
     },

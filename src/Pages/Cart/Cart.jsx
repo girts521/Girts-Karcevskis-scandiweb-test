@@ -8,17 +8,11 @@ import {mapStateToProps} from '../../store/index'
 
 class Cart extends Component {
 
-    componentDidMount() {
-        console.log(this.props.cart)
-    }
-
     render() {
 
         return(
             <div className={styles.container}> 
             <h1>Cart</h1>
-
-            <button onClick={() => console.log(this.props.cart)}>test</button>
  
             <div className={styles.productsContaner}>
             {this.props.cart ? this.props.cart.map((item) =>{
