@@ -1,6 +1,9 @@
 import { Component } from "react";
 import { WithRouter } from "../../utils/withRouter";
 import styles from "./styles.module.scss";
+import { connect } from "react-redux";
+import {currencyActions} from '../../store/currency'
+import {mapStateToProps} from '../../store/index'
 
 class ProductCard extends Component {
   constructor() {
@@ -8,6 +11,11 @@ class ProductCard extends Component {
     this.state = {
       cartVisible: false,
     };
+  }
+
+  componentDidMount() {
+// console.log(this.props.product.prices[this.props.selectedCurrency])
+console.log(this.props.product.prices[this.props.selectedCurrency].currency.symbol)
   }
 
   showCart() {
@@ -27,7 +35,7 @@ class ProductCard extends Component {
       <div
         onMouseEnter={this.showCart.bind(this)}
         onMouseLeave={this.hideCart.bind(this)}
-        className={`${styles.container} `}
+        className={`${styles.container} `} 
         onClick={this.navigateToProduct.bind(this)}
       >
         {this.props.product.inStock ? '' : <div className={styles.outOfStock}>OUT OF STOCK</div> }
@@ -35,7 +43,9 @@ class ProductCard extends Component {
         <img src={this.props.product.gallery[0]} alt="" />
         <div className={styles.text}>
           <p className={styles.name}>{this.props.product.name}</p>
-          <p className={styles.price}> {this.props.product.prices[0].amount}</p>
+
+
+          <p className={styles.price}> { `${this.props.product.prices[this.props.selectedCurrency].currency.symbol}${this.props.product.prices[this.props.selectedCurrency].amount}`}</p>
         </div>
 
         {this.state.cartVisible && !this.props.outOfStock &&(
@@ -122,4 +132,4 @@ class ProductCard extends Component {
   }
 }
 
-export default WithRouter(ProductCard);
+export default connect(mapStateToProps)(WithRouter(ProductCard));

@@ -71,8 +71,8 @@ class CartItem extends Component {
                     <h4>{data.product.name}</h4>
 
                     <div className={styles.price}>
-                      {data.product.prices[0].currency.symbol +
-                        data.product.prices[0].amount}
+                      {data.product.prices[this.props.selectedCurrency].currency.symbol +
+                        data.product.prices[this.props.selectedCurrency].amount}
                     </div>
 
                     {/* it does repeat between cart overlay item and this, so could be made into a seperate component */}

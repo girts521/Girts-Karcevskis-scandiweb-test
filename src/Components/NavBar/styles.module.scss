@@ -48,7 +48,7 @@
         .currencyPopUp{
             width: 88px;
             position: absolute;
-            bottom: -106px;
+            bottom: -150px;
             right: -30px;
             box-shadow: 5px 5px 50px -21px rgba(0,0,0,0.46);
             z-index: 2;
@@ -57,6 +57,9 @@
                 padding: 7px;
                 margin: 3px;
                 cursor: pointer;
+                font-size: 18px;
+                font-weight: 500;
+                font-family: Raleway;
 
                 &:hover{
                     background-color: rgba(238, 238, 238, 1);

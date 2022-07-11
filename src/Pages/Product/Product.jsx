@@ -10,7 +10,7 @@ import Attribute from "../../Components/Attribute/Attribute";
 import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import { connect } from "react-redux";
 import {cartActions} from '../../store/cart'
-import {mapStateToProps} from '../../store/index'
+import {mapStateToProps} from '../../store/index' 
 
 class Product extends Component {
 
@@ -74,7 +74,6 @@ class Product extends Component {
 
     return (
       <div className={styles.container}>
-        <button onClick={() => (console.log(this.props.cart))}>test</button>
         <Query
           query={gql`
             query {
@@ -115,7 +114,7 @@ class Product extends Component {
                   <div className={styles.infoContainer}>
                     <img className={styles.mainImage} src={this.state.mainPhoto || data.product.gallery[0]} alt="" />
 
-                    <div className={styles.productInfo}>
+                    <div className={styles.productInfo}> 
                       <h1>{data.product.brand}</h1>
                       <h2>{data.product.name}</h2>
 
@@ -130,7 +129,7 @@ class Product extends Component {
 
                       <div className={styles.price}>
                         <h3>PRICE</h3>
-                        <p>{`${data.product.prices[0].currency.symbol} ${data.product.prices[0].amount}`}</p>
+                        <p>{`${data.product.prices[this.props.selectedCurrency].currency.symbol} ${data.product.prices[this.props.selectedCurrency].amount}`}</p>
                       </div>
 
                       <GreenBtn func={this.addToCart.bind(this)} text={"ADD TO CART!!!"} />

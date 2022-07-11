@@ -1,7 +1,12 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
 import CartOverlay from "../../Pages/CartOverlay/CartOverlay";
-import {WithRouter} from '../../utils/withRouter'
+import { WithRouter } from "../../utils/withRouter";
+import { connect } from "react-redux";
+import { currencyActions } from "../../store/currency";
+import { mapStateToProps } from "../../store/index";
+import { gql } from "apollo-boost";
+import { Query } from "@apollo/client/react/components";
 
 class NavBar extends Component {
   constructor() {
@@ -9,7 +14,7 @@ class NavBar extends Component {
     this.state = {
       selectOpened: false,
       currencySelected: "$",
-      cartOpened: false
+      cartOpened: false,
     };
   }
 
@@ -23,44 +28,56 @@ class NavBar extends Component {
 
   onClickHandler() {
     this.setState((curState) => {
-      return {
+      return { 
         selectOpened: !curState.selectOpened,
-      };
+      }; 
     });
   }
 
-  selectCurrency(e) {
-    const text = e.target.innerText
-    const currency = text.split(' ')[0]
+  selectCurrency(e, index) {
+    const text = e.target.innerText;
+    const currency = text.split(" ")[0];
     this.setState({
       currencySelected: currency,
-      selectOpened: false
-    })
+      selectOpened: false,
+    });
+
+    this.props.dispatch(currencyActions.setCurrency(index))
   }
 
   navigateTo(e) {
-   console.log(e.target.parentNode.children.length)
-    for (let i = 0; i < e.target.parentNode.children.length; i++){
-      e.target.parentNode.children[i].className = ''
-      console.log( e.target.parentNode.children)
+    console.log(e.target.parentNode.children.length);
+    for (let i = 0; i < e.target.parentNode.children.length; i++) {
+      e.target.parentNode.children[i].className = "";
+      console.log(e.target.parentNode.children);
     }
-   e.target.className = styles.selected
-    this.props.navigate(`/category/${e.target.innerText.toLowerCase()}`)
+    e.target.className = styles.selected;
+    this.props.navigate(`/category/${e.target.innerText.toLowerCase()}`);
   }
-
-
 
   render() {
     return (
       <div className={styles.container}>
-       {this.state.cartOpened && <div onClick={this.openCloseCart.bind(this)}  className={styles.cartOverlay}></div>}
-       {this.state.cartOpened && <CartOverlay />}
-      
-       {this.state.selectOpened && <div onClick={this.onClickHandler.bind(this)} className={styles.currencyOverlay}> </div> }
+        {this.state.cartOpened && (
+          <div
+            onClick={this.openCloseCart.bind(this)}
+            className={styles.cartOverlay}
+          ></div>
+        )}
+        {this.state.cartOpened && <CartOverlay />}
+
+        {this.state.selectOpened && (
+          <div
+            onClick={this.onClickHandler.bind(this)}
+            className={styles.currencyOverlay}
+          >
+            {" "}
+          </div>
+        )}
         <div className={styles.leftNav}>
-          <div onClick={this.navigateTo.bind(this)} >ALL</div>
+          <div onClick={this.navigateTo.bind(this)}>ALL</div>
           <div onClick={this.navigateTo.bind(this)}>TECH</div>
-          <div onClick={this.navigateTo.bind(this)} >CLOTHES</div>
+          <div onClick={this.navigateTo.bind(this)}>CLOTHES</div>
         </div>
 
         <div className={styles.logo}>
@@ -114,21 +131,43 @@ class NavBar extends Component {
         </div>
 
         <div className={styles.rightNav}>
-
-          <div className={styles.selectedCurrency} onClick={this.onClickHandler.bind(this)}>{this.state.currencySelected}</div>
+          <div
+            className={styles.selectedCurrency}
+            onClick={this.onClickHandler.bind(this)}
+          >
+            {this.state.currencySelected}
+          </div>
 
           {this.state.selectOpened && (
             <div className={styles.currencyPopUp}>
-              <ul>
-                <li onClick={this.selectCurrency.bind(this)} >$ USD</li>
-                <li onClick={this.selectCurrency.bind(this)} >£ GBP</li>
-                <li onClick={this.selectCurrency.bind(this)} >A$ AUD</li>
-                <li onClick={this.selectCurrency.bind(this)} > ¥ JPY</li>
-              </ul>
+              <Query
+                query={gql`
+                  query {
+                    currencies {
+                      label
+                      symbol
+                    }
+                  }
+                `}
+              >
+              {({ loading, data }) => {
+            if (loading) return "Loading...";
+            if (data.currencies) {   
+              console.log(data.currencies)     
+              return (
+                <ul>
+                  {data.currencies && data.currencies.map((currency) => {
+                    return <li key={currency.label} onClick={(e) => {
+                      this.selectCurrency(e,data.currencies.indexOf(currency))
+                    }}> {`${currency.symbol}  ${currency.label}`} </li>
+                  })}
+                </ul>
+              )}}}
+              </Query>
             </div>
           )}
-          <svg 
-          onClick={this.openCloseCart.bind(this)} 
+          <svg
+            onClick={this.openCloseCart.bind(this)}
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -154,4 +193,4 @@ class NavBar extends Component {
   }
 }
 
-export default WithRouter(NavBar);
+export default connect(mapStateToProps)(WithRouter(NavBar));

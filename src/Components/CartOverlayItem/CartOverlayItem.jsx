@@ -49,8 +49,8 @@ class CartOverlayItem extends Component {
                     <h2>{data.product.name}</h2>
 
                     <h4>
-                      {data.product.prices[0].currency.symbol +
-                        data.product.prices[0].amount}
+                      {data.product.prices[this.props.selectedCurrency].currency.symbol +
+                        data.product.prices[this.props.selectedCurrency].amount}
                     </h4>
 
                     {this.props.product.attributes.length &&
