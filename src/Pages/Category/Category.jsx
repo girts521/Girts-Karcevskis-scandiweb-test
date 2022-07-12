@@ -7,6 +7,7 @@ import { Query } from "@apollo/client/react/components";
 
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Notification from "../../Components/Notification/Notification";
+import Loading from "../Loading/Loading";
 
 class Category extends Component {
 
@@ -46,7 +47,7 @@ class Category extends Component {
           `}
           >
             {({ loading, data }) => {
-              if (loading) return "Loading...";
+              if (loading) return <Loading /> ;
               if (data.category) {
                 return data.category.products.map((product) => {
                   return <ProductCard key={product.id} product={product} />;

@@ -7,6 +7,7 @@ import { currencyActions } from "../../store/currency";
 import { mapStateToProps } from "../../store/index";
 import { gql } from "apollo-boost";
 import { Query } from "@apollo/client/react/components";
+import Loading from "../../Pages/Loading/Loading";
 
 class NavBar extends Component {
   constructor() {
@@ -140,7 +141,7 @@ class NavBar extends Component {
             `}
           >
             {({ loading, data }) => {
-              if (loading) return "Loading...";
+              if (loading) return <Loading />;
               if (data.currencies) {
                 console.log(data.currencies);
                 return (

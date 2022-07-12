@@ -1,56 +1,86 @@
 import { Component } from "react";
-import styles from './styles.module.scss'
+import styles from "./styles.module.scss";
 import CartItem from "../../Components/CartItem/CartItem";
 import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import { connect } from "react-redux";
-import {mapStateToProps} from '../../store/index'
+import { mapStateToProps } from "../../store/index";
 import Notification from "../../Components/Notification/Notification";
-
+import Loading from "../Loading/Loading";
 
 class Cart extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isEmpty: false,
+    };
+  }
 
-    render() {
-
-        return(
-            <div className={styles.container}> 
-            
-            <h1>Cart</h1>
- 
-            <div className={styles.productsContaner}>
-            {this.props.cart ? this.props.cart.map((item) =>{
-                return   <CartItem key={item.productId + Math.random()} product={item} />
-            }) : 'loading'}
-
-            </div>
-
-            <div className={styles.cartSummary}>
-            <div>
-                <p>Tax 21%:</p>
-                <div className={styles.summaryPrice}>$42.00</div>
-            </div>
-
-            <div>
-                <p>Quantity</p>
-                <div className={styles.summaryPrice}>3</div>
-            </div>
-
-            <div>
-                <p>Total</p>
-                <div className={styles.summaryPrice}>$200.00</div>
-            </div>
-
-            <GreenBtn text={'ORDER'} />
-            </div>
-            </div>
-        )
+  componentDidMount() {
+    if (this.props.cart.length === 0) {
+      this.setState({ isEmpty: true });
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps);
+    if (prevProps.cart.length != this.props.cart.length) {
+      if (this.props.cart.length === 0) {
+        this.setState({ isEmpty: true });
+      } else {
+        this.setState({ isEmpty: false });
+      }
+    }
+  }
+
+  render() {
+    return (
+      <div className={styles.container}>
+        {this.state.isEmpty && <Notification text={"Sorry, but the cart is empty. Feel free to browse our products :)"} />}
+
+        <h1>Cart</h1>
+
+        <div className={styles.productsContaner}>
+          {this.props.cart
+            ? this.props.cart.map((item) => {
+                return (
+                  <CartItem
+                    key={item.productId + Math.random()}
+                    product={item}
+                  />
+                );
+              })
+            : <Loading />}
+        </div>
+
+        {!this.state.isEmpty && (
+          <div className={styles.cartSummary}>
+            <div>
+              <p>Tax 21%:</p>
+              <div className={styles.summaryPrice}>$42.00</div>
+            </div>
+
+            <div>
+              <p>Quantity</p>
+              <div className={styles.summaryPrice}>3</div>
+            </div>
+
+            <div>
+              <p>Total</p>
+              <div className={styles.summaryPrice}>$200.00</div>
+            </div>
+
+            <GreenBtn text={"ORDER"} />
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
-export default  connect(mapStateToProps)(Cart); 
-
+export default connect(mapStateToProps)(Cart);
 
 //I need:
 //selected currency from redux state
 // the items in the cart
 // price of each item
-//then I can go over each item 
+//then I can go over each item
