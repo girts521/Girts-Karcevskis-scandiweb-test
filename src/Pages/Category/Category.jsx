@@ -6,6 +6,7 @@ import { gql } from "apollo-boost";
 import { Query } from "@apollo/client/react/components";
 
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import Notification from "../../Components/Notification/Notification";
 
 class Category extends Component {
 
@@ -53,7 +54,7 @@ class Category extends Component {
               }
               if(!data.category){
                 //TODO: Style a propper error message 
-                return <h1>Sorry category not found</h1>
+                return <Notification text={'Sorry category not found'} />
               }
             }}
           </Query>

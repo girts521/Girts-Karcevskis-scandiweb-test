@@ -64,6 +64,7 @@ class CartItem extends Component {
           {({ loading, data }) => {
             if (loading) return "Loading...";
             if (data.product) {
+              // this.props.dispatch()
               return (
                 <>
                   <div className={styles.productDescription}>

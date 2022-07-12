@@ -4,6 +4,7 @@ import CartItem from "../../Components/CartItem/CartItem";
 import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import { connect } from "react-redux";
 import {mapStateToProps} from '../../store/index'
+import Notification from "../../Components/Notification/Notification";
 
 
 class Cart extends Component {
@@ -12,6 +13,7 @@ class Cart extends Component {
 
         return(
             <div className={styles.container}> 
+            
             <h1>Cart</h1>
  
             <div className={styles.productsContaner}>
@@ -45,3 +47,10 @@ class Cart extends Component {
 }
 
 export default  connect(mapStateToProps)(Cart); 
+
+
+//I need:
+//selected currency from redux state
+// the items in the cart
+// price of each item
+//then I can go over each item 

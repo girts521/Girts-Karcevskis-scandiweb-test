@@ -8,6 +8,7 @@ import parse from 'html-react-parser';
 
 import Attribute from "../../Components/Attribute/Attribute";
 import GreenBtn from "../../Components/GreenBtn/GreenBtn";
+import Notification from "../../Components/Notification/Notification";
 import { connect } from "react-redux";
 import {cartActions} from '../../store/cart'
 import {mapStateToProps} from '../../store/index' 
@@ -19,7 +20,8 @@ class Product extends Component {
     this.state = {
       mainPhoto: '',
       cart: '',
-      attributes: []
+      attributes: [],
+      showNotification: false
     };
   }
 
@@ -35,6 +37,10 @@ class Product extends Component {
       quantity: 1
     }))
     this.setState({attributes: []})
+    this.setState({showNotification: true})
+    setTimeout(() => {
+      this.setState({showNotification: false})
+    }, 3000)
   }
 
   selectedAttr(e) {
@@ -74,6 +80,8 @@ class Product extends Component {
 
     return (
       <div className={styles.container}>
+        {this.state.showNotification && <Notification text={'Thank you! The product has been added to the cart.'} />
+}
         <Query
           query={gql`
             query {
@@ -143,7 +151,7 @@ class Product extends Component {
             }
             if (!data.product) {
               //TODO IN NEED OF THAT ERROR MESSAGE
-              return <h1>Sorry product not found</h1>;
+              return <Notification text={'Sorry product not found'} />
             }
           }}
         </Query>
