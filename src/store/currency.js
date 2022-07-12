@@ -9,6 +9,7 @@ const currencySlice = createSlice({
         setCurrency(state, action) {
             console.log('changing currency', action.payload)
             state.selectedCurrency = action.payload
+            localStorage.setItem('selectedCurrency', JSON.stringify(action.payload))
         }
     }
 })

@@ -28,21 +28,19 @@ class NavBar extends Component {
 
   onClickHandler() {
     this.setState((curState) => {
-      return { 
+      return {
         selectOpened: !curState.selectOpened,
-      }; 
+      };
     });
   }
 
-  selectCurrency(e, index) {
-    const text = e.target.innerText;
-    const currency = text.split(" ")[0];
+  selectCurrency(currency, index) {
     this.setState({
-      currencySelected: currency,
+      currencySelected: currency.symbol,
       selectOpened: false,
     });
 
-    this.props.dispatch(currencyActions.setCurrency(index))
+    this.props.dispatch(currencyActions.setCurrency(index));
   }
 
   navigateTo(e) {
@@ -131,41 +129,57 @@ class NavBar extends Component {
         </div>
 
         <div className={styles.rightNav}>
-          <div
-            className={styles.selectedCurrency}
-            onClick={this.onClickHandler.bind(this)}
+          <Query
+            query={gql`
+              query {
+                currencies {
+                  label
+                  symbol
+                }
+              }
+            `}
           >
-            {this.state.currencySelected}
-          </div>
+            {({ loading, data }) => {
+              if (loading) return "Loading...";
+              if (data.currencies) {
+                console.log(data.currencies);
+                return (
+                  <>
+                    <div
+                      className={styles.selectedCurrency}
+                      onClick={this.onClickHandler.bind(this)}
+                    >
+                      {data.currencies[this.props.selectedCurrency].symbol}
+                    </div>
 
-          {this.state.selectOpened && (
-            <div className={styles.currencyPopUp}>
-              <Query
-                query={gql`
-                  query {
-                    currencies {
-                      label
-                      symbol
-                    }
-                  }
-                `}
-              >
-              {({ loading, data }) => {
-            if (loading) return "Loading...";
-            if (data.currencies) {   
-              console.log(data.currencies)     
-              return (
-                <ul>
-                  {data.currencies && data.currencies.map((currency) => {
-                    return <li key={currency.label} onClick={(e) => {
-                      this.selectCurrency(e,data.currencies.indexOf(currency))
-                    }}> {`${currency.symbol}  ${currency.label}`} </li>
-                  })}
-                </ul>
-              )}}}
-              </Query>
-            </div>
-          )}
+                    {this.state.selectOpened && (
+                      <div className={styles.currencyPopUp}>
+                        <ul>
+                          {data.currencies &&
+                            data.currencies.map((currency) => {
+                              return (
+                                <li
+                                  key={currency.label}
+                                  onClick={(e) => {
+                                    this.selectCurrency(
+                                      currency,
+                                      data.currencies.indexOf(currency)
+                                    );
+                                  }}
+                                >
+                                  {`${currency.symbol}  ${currency.label}`}{" "}
+                                </li>
+                              );
+                            })}
+                        </ul>
+                      </div>
+                    )}
+                  </>
+                );
+              }
+            }}
+          </Query>
+
           <svg
             onClick={this.openCloseCart.bind(this)}
             width="20"

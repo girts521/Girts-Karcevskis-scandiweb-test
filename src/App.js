@@ -12,18 +12,23 @@ import CartOverlay from "./Pages/CartOverlay/CartOverlay";
 import {WithRouter} from './utils/withRouter'
 import { connect } from "react-redux";
 import {cartActions} from './store/cart'
+import { currencyActions } from "./store/currency";
 import {mapStateToProps} from './store/index'
 
 class App extends Component {
 
   componentDidMount () {
     const cart = JSON.parse(localStorage.getItem('cart'))
+    const selectedCurrency = JSON.parse(localStorage.getItem('selectedCurrency'))
     if(cart){
       this.props.dispatch(cartActions.setCart(cart))
     }
+    if(selectedCurrency){
+      this.props.dispatch(currencyActions.setCurrency(selectedCurrency))
+    }
   }
 
-  render() {
+  render() { 
     return (
       <>
         <NavBar />
