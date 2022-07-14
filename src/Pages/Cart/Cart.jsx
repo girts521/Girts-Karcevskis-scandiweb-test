@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { mapStateToProps } from "../../store/index";
 import Notification from "../../Components/Notification/Notification";
 import Loading from "../Loading/Loading";
+import PriceSummary from "../../Components/PriceSummary/PriceSummary";
 
 class Cart extends Component {
   constructor() {
@@ -53,24 +54,11 @@ class Cart extends Component {
         </div>
 
         {!this.state.isEmpty && (
-          <div className={styles.cartSummary}>
-            <div>
-              <p>Tax 21%:</p>
-              <div className={styles.summaryPrice}>$42.00</div>
-            </div>
-
-            <div>
-              <p>Quantity</p>
-              <div className={styles.summaryPrice}>3</div>
-            </div>
-
-            <div>
-              <p>Total</p>
-              <div className={styles.summaryPrice}>$200.00</div>
-            </div>
-
+            <div className={styles.cartSummary}>
+            <PriceSummary />
             <GreenBtn text={"ORDER"} />
-          </div>
+            </div>
+
         )}
       </div>
     );
