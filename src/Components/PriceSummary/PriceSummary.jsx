@@ -40,7 +40,7 @@ class PriceSummary extends Component {
         this.props.selectedCurrency
       );
       const total = calculateTotal(priceData.prices);
-      this.setState({
+      this.setState({ 
         total: total,
         prices: priceData.prices,
         symbol: priceData.symbol,

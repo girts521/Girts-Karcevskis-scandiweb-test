@@ -44,6 +44,11 @@
         .selectedCurrency{
             margin-right: 20px;
             cursor: pointer;
+
+            .arrow{
+                display: inline;
+                padding-left: 5px;
+            }
         }
 
         .currencyPopUp{
@@ -67,6 +72,28 @@
                 }
             }
         }
+    }
+
+    .cart{
+        position: relative;
+        cursor: pointer;
+        .itemCount{
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            font-size: 14px;
+            border: 2px solid black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            z-index: 2;
+            color: white;
+            background-color: black;
+        }
+        
     }
 
     .currencyOverlay{

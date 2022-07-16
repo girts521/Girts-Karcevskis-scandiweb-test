@@ -3,7 +3,7 @@ import { WithRouter } from "../../utils/withRouter";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
 import { currencyActions } from "../../store/currency";
-import {cartActions} from '../../store/cart'
+import { cartActions } from "../../store/cart";
 import { mapStateToProps } from "../../store/index";
 import Notification from "../Notification/Notification";
 
@@ -31,12 +31,15 @@ class ProductCard extends Component {
 
   navigateToProduct(e) {
     console.log(this.props.product);
-    if(this.props.product.inStock === false){
-      this.props.setNotification(true, 'Sorry, this product is currently out of stock.')
+    if (this.props.product.inStock === false) {
+      this.props.setNotification(
+        true,
+        "Sorry, this product is currently out of stock."
+      );
       setTimeout(() => {
-        this.props.setNotification(false, '')
-      }, 3000)
-      return
+        this.props.setNotification(false, "");
+      }, 3000);
+      return;
     }
     if (e.target.parentNode.id && e.target.parentNode.id === "cart") {
       const defaultAttributes = [];
@@ -47,19 +50,23 @@ class ProductCard extends Component {
           attrType: attr.type,
         });
       });
-      console.log(defaultAttributes)
-      this.props.dispatch(cartActions.addToCart({
-        id: this.props.product.id + Math.random(),
-        productId: this.props.product.id,
-        attributes: defaultAttributes,
-        quantity: 1
-      }))
-      this.props.setNotification(true, 'Thank you! The product was successfully added to cart')
+      this.props.dispatch(
+        cartActions.addToCart({
+          id: this.props.product.id + Math.random(),
+          productId: this.props.product.id,
+          attributes: defaultAttributes,
+          quantity: 1,
+        })
+      );
+      this.props.setNotification(
+        true,
+        "Thank you! The product was successfully added to cart"
+      );
       setTimeout(() => {
-        this.props.setNotification(false, '')
-      }, 3000)
+        this.props.setNotification(false, "");
+      }, 3000);
     } else {
-      this.props.navigate(`/product/${this.props.product.id}`)
+      this.props.navigate(`/product/${this.props.product.id}`);
     }
   }
 
@@ -95,7 +102,7 @@ class ProductCard extends Component {
         {this.state.cartVisible && !this.props.outOfStock && (
           <>
             <div id="cart" className={styles.cartIcon}>
-              <svg
+              <svg 
                 width="74"
                 height="74"
                 viewBox="0 0 74 74"
