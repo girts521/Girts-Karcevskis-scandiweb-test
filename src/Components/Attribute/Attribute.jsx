@@ -13,7 +13,10 @@ class Attribute extends Component {
             })}
 
             {this.props.swatch && this.props.items.map((item) => {
-                return <div onClick={this.props.func} key={item.value} style={{backgroundColor: item.displayValue}}></div>
+                return <div onClick={(e) => {
+                    console.log('trying to pass:', item.value)
+                    this.props.func(e, item.value)
+                }} key={item.value} style={{backgroundColor: item.value}}></div>
             })}
 
             </div> 

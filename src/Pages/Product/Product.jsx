@@ -37,14 +37,14 @@ class Product extends Component {
 
 const attributes = this.state.attributes.length ? this.state.attributes : defaultAttributes
 
-console.log(attributes)
+console.log('attributes when adding: ',attributes)
 
 
 
     this.props.dispatch(cartActions.addToCart({
       id: this.props.params.productId + Math.random(),
       productId: this.props.params.productId,
-      attributes: this.state.attributes,
+      attributes: attributes,
       quantity: 1
     }))
     this.setState({attributes: []})
@@ -54,7 +54,8 @@ console.log(attributes)
     }, 3000)
   }
 
-  selectedAttr(e) {
+  selectedAttr(e, selectedAttr) {
+    console.log('passed attr: ', selectedAttr)
     console.log(e.target.parentNode.children)
    const children = e.target.parentNode.children
    let style = ''
@@ -81,7 +82,7 @@ console.log(attributes)
     if(e.target.innerText === ''){
        attr = {
         attrName: e.target.parentNode.previousElementSibling.innerText,
-        attrValue: e.target.style.backgroundColor,
+        attrValue: selectedAttr,
         attrType: 'swatch'
       }
     }else if(e.target.innerText.length > 0){
@@ -173,7 +174,9 @@ console.log(attributes)
                             const defaultAttributes = []
                             data.product.attributes.forEach((attr) => {
                              defaultAttributes.push({
-                              attrName
+                              attrName: attr.name,
+                              attrValue: attr.items[0].value,
+                              attrType: attr.type
                              })
                              })
                         this.addToCart(defaultAttributes)
