@@ -35,14 +35,21 @@ class Cart extends Component {
 
   render() {
     return (
-      <div className={styles.container}>
-        {this.state.isEmpty && <Notification text={"Sorry, but the cart is empty. Feel free to browse our products :)"} />}
+      <>
+        {this.state.isEmpty && (
+          <Notification
+            text={
+              "Sorry, but the cart is empty. Feel free to browse our products :)"
+            }
+          />
+        )}
 
-        <h1>Cart</h1>
+        <div className={styles.container}>
+          <h1>Cart</h1>
 
-        <div className={styles.productsContaner}>
-          {this.props.cart
-            ? this.props.cart.map((item) => {
+          <div className={styles.productsContaner}>
+            {this.props.cart ? (
+              this.props.cart.map((item) => {
                 return (
                   <CartItem
                     key={item.productId + Math.random()}
@@ -50,17 +57,19 @@ class Cart extends Component {
                   />
                 );
               })
-            : <Loading />}
-        </div>
+            ) : (
+              <Loading />
+            )}
+          </div>
 
-        {!this.state.isEmpty && (
+          {!this.state.isEmpty && (
             <div className={styles.cartSummary}>
-            <PriceSummary />
-            <GreenBtn text={"ORDER"} />
+              <PriceSummary />
+              <GreenBtn text={"ORDER"} />
             </div>
-
-        )}
-      </div>
+          )}
+        </div>
+      </>
     );
   }
 }

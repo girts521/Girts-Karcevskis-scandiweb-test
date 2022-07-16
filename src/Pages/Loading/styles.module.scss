@@ -1,7 +1,6 @@
 .container{
     height: 100%;
     width: 100%;
-    // background-color: gray;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,3 +36,6 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(270deg); }
   }
+
+  //The animation was largely inspired by codepen: https://codepen.io/mrrocks/pen/ExLovj
+  //The svg was also taken from that codepen

@@ -11,10 +11,24 @@ import Loading from "../Loading/Loading";
 
 class Category extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      notification: false,
+      notificationText: ''
+    };
+  }
+
+  setNotification(state, text) {
+    console.log(state)
+    this.setState({notification: state, notificationText: text})
+  }
+
   render() {
     return (
       <>
-        <h1>
+      {this.state.notification && <Notification text={this.state.notificationText}/>}
+        <h1> 
           {this.props.params.categoryName
             ? this.props.params.categoryName
             : "All"}
@@ -34,6 +48,13 @@ class Category extends Component {
                   name
                   inStock
                   gallery
+                  attributes{
+                    name
+                    type
+                    items{
+                      value
+                    }
+                  }
                   prices {
                     currency {
                       label
@@ -50,7 +71,7 @@ class Category extends Component {
               if (loading) return <Loading /> ;
               if (data.category) {
                 return data.category.products.map((product) => {
-                  return <ProductCard key={product.id} product={product} />;
+                  return <ProductCard setNotification={this.setNotification.bind(this)} key={product.id} product={product} />;
                 });
               }
               if(!data.category){

@@ -12,11 +12,12 @@ import Notification from "../../Components/Notification/Notification";
 import { connect } from "react-redux";
 import {cartActions} from '../../store/cart'
 import {mapStateToProps} from '../../store/index' 
+import Loading from "../Loading/Loading";
 
 class Product extends Component {
 
   constructor() {
-    super();
+    super(); 
     this.state = {
       mainPhoto: '',
       cart: '',
@@ -28,9 +29,6 @@ class Product extends Component {
 
   setMainPhoto(e){
     this.setState({mainPhoto: e.target.src})
-  }
-
-  setDefaultAttributes(attr){
   }
 
   addToCart(defaultAttributes) {
@@ -140,7 +138,7 @@ console.log('attributes when adding: ',attributes)
           `}
         >
           {({ loading, data }) => {
-            if (loading) return "Loading...";
+            if (loading) return <Loading size={'30%'}/>;
             if (data.product) {  
               return (
                 <>
