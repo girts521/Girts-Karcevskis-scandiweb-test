@@ -1,18 +1,16 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
-
 import { gql } from "apollo-boost";
 import { Query } from "@apollo/client/react/components";
 import { WithRouter } from "../../utils/withRouter";
 import parse from "html-react-parser";
-
 import Attribute from "../../Components/Attribute/Attribute";
 import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import Notification from "../../Components/Notification/Notification";
 import { connect } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { mapStateToProps } from "../../store/index";
-import Loading from "../Loading/Loading";
+import Loading from "../../Components/Loading/Loading";
 
 class Product extends Component {
   constructor() {
@@ -63,17 +61,12 @@ class Product extends Component {
   }
 
   selectedAttr(e, selectedAttr) {
-    console.log("passed attr: ", selectedAttr);
-    console.log(e.target.parentNode.children);
     const children = e.target.parentNode.children;
     let style = "";
 
     if (e.target.innerText.length > 0) {
-      console.log("text");
       e.target.style = "background-color: black; color: white";
     } else if (e.target.innerText === "") {
-      console.log("swatch");
-      console.log(e.target.style.backgroundColor);
       style = `background-color: ${e.target.style.backgroundColor};`;
       e.target.style = `${style}; border: 1px solid rgba(94, 206, 123, 1)`;
     }
@@ -84,7 +77,6 @@ class Product extends Component {
           e.target.innerText === ""
             ? `background-color: ${children[i].style.backgroundColor}`
             : "";
-        console.log(style);
         children[i].style = style;
       }
     }

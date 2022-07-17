@@ -1,13 +1,8 @@
 import { Component } from "react";
-import CartItem from "../../Components/CartItem/CartItem";
-import Color from "../../Components/Color/Color";
-import Size from "../../Components/Attribute/Attribute";
 import CartOverlayItem from "../../Components/CartOverlayItem/CartOverlayItem";
 import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import styles from "./styles.module.scss";
-
 import { connect } from "react-redux";
-import { cartActions } from "../../store/cart";
 import { mapStateToProps } from "../../store/index";
 import { WithRouter } from "../../utils/withRouter";
 import { updateAllPrices, calculateTotal } from "../../utils/allPrices";
@@ -26,37 +21,32 @@ class CartOverlay extends Component {
   async componentDidMount() {
     const storedCart = this.props.cart;
     this.setState({ cart: storedCart });
-
     const priceData = await updateAllPrices(
       this.props.cart,
       this.props.selectedCurrency
     );
-
     const total = calculateTotal(priceData.prices);
-
     this.setState({
       symbol: priceData.symbol,
       total,
     });
   }
 
-  async componentDidUpdate(prevProps, prevState){
+  async componentDidUpdate(prevProps, prevState) {
     if (
-        prevProps.selectedCurrency != this.props.selectedCurrency ||
-        prevProps.cart != this.props.cart
-      ) {
-        const priceData = await updateAllPrices(
-            this.props.cart,
-            this.props.selectedCurrency
-          );
-      
-          const total = calculateTotal(priceData.prices);
-      
-          this.setState({
-            symbol: priceData.symbol,
-            total,
-          });
-      }
+      prevProps.selectedCurrency != this.props.selectedCurrency ||
+      prevProps.cart != this.props.cart
+    ) {
+      const priceData = await updateAllPrices(
+        this.props.cart,
+        this.props.selectedCurrency
+      );
+      const total = calculateTotal(priceData.prices);
+      this.setState({
+        symbol: priceData.symbol,
+        total,
+      });
+    }
   }
 
   render() {
@@ -80,7 +70,6 @@ class CartOverlay extends Component {
         <div className={styles.total}>
           <p>Total</p>
           <p className={styles.totalPrice}>
-            {" "}
             {this.state.symbol && this.state.symbol}
             {this.state.total && this.state.total.toFixed(2)}
           </p>

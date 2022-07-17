@@ -5,7 +5,7 @@ import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import { connect } from "react-redux";
 import { mapStateToProps } from "../../store/index";
 import Notification from "../../Components/Notification/Notification";
-import Loading from "../Loading/Loading";
+import Loading from "../../Components/Loading/Loading";
 import PriceSummary from "../../Components/PriceSummary/PriceSummary";
 
 class Cart extends Component {
@@ -23,7 +23,6 @@ class Cart extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps);
     if (prevProps.cart.length != this.props.cart.length) {
       if (this.props.cart.length === 0) {
         this.setState({ isEmpty: true });
@@ -75,9 +74,3 @@ class Cart extends Component {
 }
 
 export default connect(mapStateToProps)(Cart);
-
-//I need:
-//selected currency from redux state
-// the items in the cart
-// price of each item
-//then I can go over each item

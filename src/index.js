@@ -4,11 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-// import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider } from "@apollo/react-hooks";
 import { client } from "./Apollo";
-import ApolloClient from "apollo-boost";
-
 import { Provider } from "react-redux";
 import store from "./store/index";
 

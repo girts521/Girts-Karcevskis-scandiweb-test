@@ -1,18 +1,17 @@
-.container{
-    // border: 1px solid black;
-    width: 100%;
-    height: 100%;
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  p {
+    font-weight: 400;
+    margin-right: 15px;
+  }
+
+  div {
+    font-weight: 700;
     display: flex;
-    flex-direction: column;
-    p{
-        font-weight: 400;
-        margin-right: 15px;
-    }
-    
-    div{
-        font-weight: 700;
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 8px;
-    }
+    flex-direction: row;
+    margin-bottom: 8px;
+  }
 }

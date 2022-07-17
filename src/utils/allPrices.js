@@ -9,13 +9,10 @@ export const allPrices = async (products, index, newPrices) => {
     if (newPrices) {
       prices = newPrices;
     }
-
     if (products.length === 0) {
       return prices;
     }
-
     const product = products.pop();
-
     const query = gql`
     query {
         product(id: "${product.id}"){
@@ -38,9 +35,7 @@ export const allPrices = async (products, index, newPrices) => {
     }
     await recursive(products, index, prices);
   };
-
   await recursive();
-
   return { prices, symbol };
 };
 

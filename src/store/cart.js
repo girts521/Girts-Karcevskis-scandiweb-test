@@ -6,33 +6,33 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: initialCartState,
   reducers: {
-
-    changeQuantity(state, action){
-      const foundItem = state.cart.find((item) => item.id === action.payload.id)
-      if(action.payload.action === 'add'){
-        foundItem.quantity ++
+    changeQuantity(state, action) {
+      const foundItem = state.cart.find(
+        (item) => item.id === action.payload.id
+      );
+      if (action.payload.action === "add") {
+        foundItem.quantity++;
       }
-      if(action.payload.action === 'remove'){
-          if(foundItem.quantity === 1){
-           const index =  state.cart.indexOf(foundItem)
-           state.cart.splice(index, 1)
-          }else{
-            foundItem.quantity --
-          }
+      if (action.payload.action === "remove") {
+        if (foundItem.quantity === 1) {
+          const index = state.cart.indexOf(foundItem);
+          state.cart.splice(index, 1);
+        } else {
+          foundItem.quantity--;
+        }
       }
-
-      localStorage.setItem('cart', JSON.stringify(state.cart))
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
 
     setCart(state, action) {
-      state.cart = action.payload
+      state.cart = action.payload;
     },
 
     addToCart(state, action) {
       if (!state.cart.length) {
         state.cart.push(action.payload);
-        const cartStr = JSON.stringify(state.cart)
-        localStorage.setItem('cart', cartStr)
+        const cartStr = JSON.stringify(state.cart);
+        localStorage.setItem("cart", cartStr);
         return;
       }
       //get array of the same products
@@ -43,8 +43,8 @@ const cartSlice = createSlice({
       if (!sameProducts.length) {
         // push, because there are no products with the same id in the cart
         state.cart.push(action.payload);
-        const cartStr = JSON.stringify(state.cart)
-        localStorage.setItem('cart', cartStr)
+        const cartStr = JSON.stringify(state.cart);
+        localStorage.setItem("cart", cartStr);
         return;
       }
       let push = false;
@@ -66,8 +66,8 @@ const cartSlice = createSlice({
         }
         if (!sameAttributes.includes(false)) {
           sameProducts[i].quantity++;
-          const cartStr = JSON.stringify(state.cart)
-          localStorage.setItem('cart', cartStr)
+          const cartStr = JSON.stringify(state.cart);
+          localStorage.setItem("cart", cartStr);
           return;
         } else {
           push = true;
@@ -75,8 +75,8 @@ const cartSlice = createSlice({
       }
       if (push === true) {
         state.cart.push(action.payload);
-        const cartStr = JSON.stringify(state.cart)
-        localStorage.setItem('cart', cartStr)
+        const cartStr = JSON.stringify(state.cart);
+        localStorage.setItem("cart", cartStr);
       }
     },
   },

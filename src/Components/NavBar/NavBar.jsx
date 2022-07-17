@@ -7,7 +7,7 @@ import { currencyActions } from "../../store/currency";
 import { mapStateToProps } from "../../store/index";
 import { gql } from "apollo-boost";
 import { Query } from "@apollo/client/react/components";
-import Loading from "../../Pages/Loading/Loading";
+import Loading from "../Loading/Loading";
 import { updateAllPrices } from "../../utils/allPrices";
 
 class NavBar extends Component {
@@ -30,13 +30,8 @@ class NavBar extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    // if(prevState.cart != this.props.cart){
-    //   console.log('using prevstate')
-    // }
     if (prevProps.cart != this.props.cart) {
-      console.log("using prevprops");
       const index = this.props.selectedCurrency;
-
       const data = await updateAllPrices(this.props.cart, index);
       const itemCount = data.prices.length;
       this.setState({ itemCount: itemCount });
@@ -69,10 +64,8 @@ class NavBar extends Component {
   }
 
   navigateTo(e) {
-    console.log(e.target.parentNode.children.length);
     for (let i = 0; i < e.target.parentNode.children.length; i++) {
       e.target.parentNode.children[i].className = "";
-      console.log(e.target.parentNode.children);
     }
     e.target.className = styles.selected;
     this.props.navigate(`/category/${e.target.innerText.toLowerCase()}`);
@@ -93,9 +86,7 @@ class NavBar extends Component {
           <div
             onClick={this.onClickHandler.bind(this)}
             className={styles.currencyOverlay}
-          >
-            {" "}
-          </div>
+          ></div>
         )}
         <div className={styles.leftNav}>
           <div onClick={this.navigateTo.bind(this)}>ALL</div>
@@ -167,7 +158,6 @@ class NavBar extends Component {
             {({ loading, data }) => {
               if (loading) return <Loading />;
               if (data.currencies) {
-                console.log(data.currencies);
                 return (
                   <>
                     <div
@@ -176,20 +166,20 @@ class NavBar extends Component {
                     >
                       {data.currencies[this.props.selectedCurrency].symbol}
                       <div className={styles.arrow}>
-                      <svg
-                        width="8"
-                        height="4"
-                        viewBox="0 0 8 4"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1 0.5L4 3.5L7 0.5"
-                          stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
+                        <svg
+                          width="8"
+                          height="4"
+                          viewBox="0 0 8 4"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M1 0.5L4 3.5L7 0.5"
+                            stroke="black"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
                       </div>
                     </div>
 

@@ -2,10 +2,8 @@ import { Component } from "react";
 import { WithRouter } from "../../utils/withRouter";
 import styles from "./styles.module.scss";
 import { connect } from "react-redux";
-import { currencyActions } from "../../store/currency";
 import { cartActions } from "../../store/cart";
 import { mapStateToProps } from "../../store/index";
-import Notification from "../Notification/Notification";
 
 class ProductCard extends Component {
   constructor() {
@@ -13,12 +11,6 @@ class ProductCard extends Component {
     this.state = {
       cartVisible: false,
     };
-  }
-
-  componentDidMount() {
-    console.log(
-      this.props.product.prices[this.props.selectedCurrency].currency.symbol
-    );
   }
 
   showCart() {
@@ -30,7 +22,6 @@ class ProductCard extends Component {
   }
 
   navigateToProduct(e) {
-    console.log(this.props.product);
     if (this.props.product.inStock === false) {
       this.props.setNotification(
         true,
@@ -91,7 +82,6 @@ class ProductCard extends Component {
           <p className={styles.name}>{this.props.product.name}</p>
 
           <p className={styles.price}>
-            {" "}
             {`${
               this.props.product.prices[this.props.selectedCurrency].currency
                 .symbol
@@ -102,7 +92,7 @@ class ProductCard extends Component {
         {this.state.cartVisible && !this.props.outOfStock && (
           <>
             <div id="cart" className={styles.cartIcon}>
-              <svg 
+              <svg
                 width="74"
                 height="74"
                 viewBox="0 0 74 74"

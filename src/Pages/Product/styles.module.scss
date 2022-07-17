@@ -11,7 +11,6 @@
   .sideImages {
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
     height: 100%;
     overflow: scroll;
@@ -30,16 +29,13 @@
     width: 70%;
 
     .mainImage {
-      // height: 511px;
-      // width: 100%;
       max-width: 40vw;
       max-height: 70vh;
-      margin-right: 100px; 
+      margin-right: 100px;
     }
 
     .productInfo {
       font-family: Raleway;
-      // width: 29%;
       max-width: 35%;
 
       h1 {
@@ -53,8 +49,6 @@
         font-size: 30px;
         margin-bottom: 40px;
       }
-
-
 
       .price {
         margin-bottom: 20px;

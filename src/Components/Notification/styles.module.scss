@@ -1,20 +1,18 @@
+.container {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  background-color: #b7e4c7;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
 
-.container{
-    position: absolute;
-    top: 100px;
-    width: 100%;
-    background-color: #b7e4c7;
-    height: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-
-   div{
+  div {
     font-size: 25px;
     font-family: Raleway;
     width: 80%;
     text-align: center;
-
-   }
+  }
 }

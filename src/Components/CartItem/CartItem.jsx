@@ -1,12 +1,12 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
 import Attribute from "../Attribute/Attribute";
+import Loading from "../Loading/Loading";
 import { gql } from "apollo-boost";
 import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
-import {mapStateToProps} from '../../store/index'
-import {cartActions} from '../../store/cart'
-
+import { mapStateToProps } from "../../store/index";
+import { cartActions } from "../../store/cart";
 
 //TODO:
 //seems to have a lot in common with cart overlay item so should be considered to combine them?
@@ -19,19 +19,16 @@ class CartItem extends Component {
     };
   }
 
-  componentDidMount(){
-    console.log(this.props)
-  }
-
-  changeQuantity(action){
-   this.props.dispatch(cartActions.changeQuantity({
-    id: this.props.product.id,
-    action: action
-   }))
+  changeQuantity(action) {
+    this.props.dispatch(
+      cartActions.changeQuantity({
+        id: this.props.product.id,
+        action: action,
+      })
+    );
   }
 
   nextPhoto(length) {
-    console.log(length);
     this.setState((prevState) => {
       if (prevState.photoIndex === length - 1) {
         return { photoIndex: 0 };
@@ -62,9 +59,8 @@ class CartItem extends Component {
           `}
         >
           {({ loading, data }) => {
-            if (loading) return "Loading...";
+            if (loading) return <Loading />;
             if (data.product) {
-              // this.props.dispatch()
               return (
                 <>
                   <div className={styles.productDescription}>
@@ -72,7 +68,8 @@ class CartItem extends Component {
                     <h4>{data.product.name}</h4>
 
                     <div className={styles.price}>
-                      {data.product.prices[this.props.selectedCurrency].currency.symbol +
+                      {data.product.prices[this.props.selectedCurrency].currency
+                        .symbol +
                         data.product.prices[this.props.selectedCurrency].amount}
                     </div>
 
@@ -118,11 +115,25 @@ class CartItem extends Component {
 
                   <div className={styles.productImg}>
                     <div className={styles.btns}>
-                      <div onClick={() => {this.changeQuantity('add')}} className={styles.add}>+</div>
+                      <div
+                        onClick={() => {
+                          this.changeQuantity("add");
+                        }}
+                        className={styles.add}
+                      >
+                        +
+                      </div>
                       <div className={styles.quantity}>
                         {this.props.product.quantity}
                       </div>
-                      <div onClick={() => {this.changeQuantity('remove')}} className={styles.delete}>-</div>
+                      <div
+                        onClick={() => {
+                          this.changeQuantity("remove");
+                        }}
+                        className={styles.delete}
+                      >
+                        -
+                      </div>
                     </div>
                     {data.product.gallery.length > 1 && (
                       <div className={styles.arrows}>
@@ -183,4 +194,4 @@ class CartItem extends Component {
   }
 }
 
-export default  connect(mapStateToProps)(CartItem);
+export default connect(mapStateToProps)(CartItem);
