@@ -27,6 +27,7 @@ class CartOverlay extends Component {
     );
     const total = calculateTotal(priceData.prices);
     this.setState({
+      prices: priceData.prices,
       symbol: priceData.symbol,
       total,
     });
@@ -43,6 +44,7 @@ class CartOverlay extends Component {
       );
       const total = calculateTotal(priceData.prices);
       this.setState({
+        prices: priceData.prices,
         symbol: priceData.symbol,
         total,
       });
@@ -52,7 +54,10 @@ class CartOverlay extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <h1>My bag</h1>
+        <h1>
+          My bag,
+        {this.state.prices.length > 0 && <span> {this.state.prices.length} {this.state.prices.length > 1 ? 'items' : 'item'}</span>}
+        </h1>
 
         <div className={styles.productsContainer}>
           {this.state.cart.length

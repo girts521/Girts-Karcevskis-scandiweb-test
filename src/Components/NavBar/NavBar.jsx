@@ -176,8 +176,8 @@ class NavBar extends Component {
                           <path
                             d="M1 0.5L4 3.5L7 0.5"
                             stroke="black"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                         </svg>
                       </div>
