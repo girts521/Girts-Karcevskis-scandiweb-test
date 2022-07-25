@@ -8,11 +8,21 @@
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  img {
-    max-height: 79%;
-    margin: 15px;
-    margin-bottom: 0;
+  .image{
+    height: 79%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      max-height: 100%;
+      width: auto;
+      max-width: 100%;
+      margin: 15px;
+      margin-bottom: 0;
+    }
   }
+
 
   .text {
     margin-left: 15px;

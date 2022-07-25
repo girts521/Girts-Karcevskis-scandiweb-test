@@ -22,6 +22,7 @@ class Product extends Component {
       defaultAttributes: [],
       showNotification: false,
       missingAttribute: false,
+      outOfStock: false
     };
   }
 
@@ -29,7 +30,14 @@ class Product extends Component {
     this.setState({ mainPhoto: e.target.src });
   }
 
-  addToCart(defaultAttributes) {
+  addToCart(defaultAttributes, inStock) {
+    if (inStock === false) {
+      this.setState({outOfStock: true})
+      setTimeout(() => {
+        this.setState({ outOfStock: false });
+      }, 3000);
+      return
+    };
     if (
       this.state.attributes.length &&
       this.state.attributes.length != defaultAttributes.length
@@ -117,6 +125,11 @@ class Product extends Component {
             text={"Thank you! The product has been added to the cart."}
           />
         )}
+        {this.state.outOfStock && (
+          <Notification
+            text={"Sorry, the product is currently out of stock."}
+          />
+        )}
         {this.state.missingAttribute && (
           <Notification text={"Please select all attributes"} />
         )}
@@ -126,6 +139,7 @@ class Product extends Component {
             query {
               product(id: "${this.props.params.productId}") {
                 name
+                inStock
                 gallery
                 description
                 attributes {
@@ -222,9 +236,12 @@ class Product extends Component {
                               attrType: attr.type,
                             });
                           });
-                          this.addToCart(defaultAttributes);
+                          this.addToCart(
+                            defaultAttributes,
+                            data.product.inStock
+                          );
                         }}
-                        text={"ADD TO CART!!!"}
+                        text={"ADD TO CART"}
                       />
 
                       {parse(data.product.description)}

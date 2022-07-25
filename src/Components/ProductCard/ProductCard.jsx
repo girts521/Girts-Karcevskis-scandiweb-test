@@ -19,19 +19,9 @@ class ProductCard extends Component {
 
   hideCart() {
     this.setState({ cartVisible: false });
-  }
+  } 
 
   navigateToProduct(e) {
-    if (this.props.product.inStock === false) {
-      this.props.setNotification(
-        true,
-        "Sorry, this product is currently out of stock."
-      );
-      setTimeout(() => {
-        this.props.setNotification(false, "");
-      }, 3000);
-      return;
-    }
     if (e.target.parentNode.id && e.target.parentNode.id === "cart") {
       const defaultAttributes = [];
       this.props.product.attributes.forEach((attr) => {
@@ -76,10 +66,10 @@ class ProductCard extends Component {
         )}
         {this.props.discount && (
           <div className={styles.discount}>{this.props.discount}</div>
-        )}
-        <img src={this.props.product.gallery[0]} alt="" />
+        )} 
+       <div className={styles.image}> <img src={this.props.product.gallery[0]} alt="" /></div>
         <div className={styles.text}>
-          <p className={styles.name}>{this.props.product.name}</p>
+          <p className={styles.name}>{this.props.product.brand}  {this.props.product.name}</p>
 
           <p className={styles.price}>
             {`${
