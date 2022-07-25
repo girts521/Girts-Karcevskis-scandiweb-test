@@ -30,7 +30,7 @@ class Product extends Component {
     this.setState({ mainPhoto: e.target.src });
   }
 
-  addToCart(defaultAttributes, inStock) {
+  addToCart(length, inStock) {
     if (inStock === false) {
       this.setState({outOfStock: true})
       setTimeout(() => {
@@ -40,7 +40,8 @@ class Product extends Component {
     };
     if (
       this.state.attributes.length &&
-      this.state.attributes.length != defaultAttributes.length
+      this.state.attributes.length !== length ||
+      this.state.attributes.length === 0
     ) {
       this.setState({ missingAttribute: true });
       setTimeout(() => {
@@ -49,9 +50,7 @@ class Product extends Component {
       return;
     }
 
-    const attributes = this.state.attributes.length
-      ? this.state.attributes
-      : defaultAttributes;
+    const attributes = this.state.attributes
 
     this.props.dispatch(
       cartActions.addToCart({
@@ -228,16 +227,16 @@ class Product extends Component {
 
                       <GreenBtn
                         func={() => {
-                          const defaultAttributes = [];
-                          data.product.attributes.forEach((attr) => {
-                            defaultAttributes.push({
-                              attrName: attr.name,
-                              attrValue: attr.items[0].value,
-                              attrType: attr.type,
-                            });
-                          });
+                          // const defaultAttributes = [];
+                          // data.product.attributes.forEach((attr) => {
+                          //   defaultAttributes.push({
+                          //     attrName: attr.name,
+                          //     attrValue: attr.items[0].value,
+                          //     attrType: attr.type,
+                          //   });
+                          // });
                           this.addToCart(
-                            defaultAttributes,
+                            data.product.attributes.length,
                             data.product.inStock
                           );
                         }}
