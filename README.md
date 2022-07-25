@@ -1,20 +1,16 @@
 Scandiweb React Developer test
 
-For this project it was necessary to use class components due to project requirements. This raised a few challenges, because many libraries have depreciated class components, and while some still provide support for it they strongly recommend using functional components. 
+For this project it was necessary to use class components due to project requirements. This raised a few challenges, because many libraries have depreciated class components, and while some still provide support for it they strongly recommend using functional components.
 
-One of the libraries which has depreciated class components was react router. In the latest version there is no support for clas components and hooks must be used. The choice here was to try and use an older react router version, or use a higher order component which uses functional component and hooks. I made a choice in favor of the hoc, since I believe that using older versions of libraries may rise other compatability issues. 
+One of the libraries which has depreciated class components was react router. In the latest version there is no support for class components and hooks must be used. The choice here was to try and use an older react router version, or use a higher order component which uses functional component and hooks. I made a choice in favor of the hoc, since I believe that using older versions of libraries may rise other compatibility issues.
 
-Initially I planned to use Recoil instead of Redux. Since i have been using Redux in previous projects, and Recoil sounds very interesting and I wanted to try it out. But the I also realized that Recoil does not support class components, and thus I went with Redux. Redux has support for class components and it was fairly easy to implement it. But they do recomment using functional components. 
+Initially, I planned to use Recoil instead of Redux. Since i have been using Redux in previous projects, and Recoil sounds very interesting and I wanted to try it out. But the I also realized that Recoil does not support class components, and thus I went with Redux. Redux has support for class components and it was fairly easy to implement it. But they do recommend using functional components.
 
-During this project I learned a few new skills and technologies. 
-Before I did not use class components, so I had to learn some of the aspects related to them. But I enjoyed this experience and in the end it did not feel much different. Except some compatability issues. 
+During this project I learned a few new skills and technologies. Before I did not use class components, so I had to learn some aspects related to them. But I enjoyed this experience and in the end it did not feel much different. Except some compatibility issues.
 
-One of the requirements was to use Apollo and GraphQl, which I havent used before and thus had to learn the basics. 
-Before I always used an Express backend with REST api endpoints, thus I was very used to this approach. 
-But after reading some documentation and some graphql videos, I was able to implement it and would love to try to build my own backend based on graphql. I liked the flexibility of calling different data from frontend. 
+One of the requirements was to use Apollo and GraphQL, which I havent used before and thus had to learn the basics. Before I always used an Express backend with REST api endpoints, thus I was very used to this approach. But after reading some documentation and some GraphQL videos, I was able to implement it and would love to try to build my own backend based on GraphQL. I liked the flexibility of calling different data from frontend.
 
-The backend was provided by Scandiweb for this project and is available here: https://github.com/scandiweb/junior-react-endpoint
-To view this project it is necessary to launch your own instance of graphql server.
+The backend was provided by Scandiweb for this project and is available here: https://github.com/scandiweb/junior-react-endpoint To view this project it is necessary to launch your own instance of GraphQL server.
 
 ## Available Scripts
 
