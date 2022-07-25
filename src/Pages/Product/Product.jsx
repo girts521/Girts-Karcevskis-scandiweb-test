@@ -168,7 +168,7 @@ class Product extends Component {
               return (
                 <>
                   <div className={styles.sideImages}>
-                    {data.product.gallery.map((photo) => {
+                    {data.product.gallery.map((photo) => { 
                       return (
                         <img
                           key={photo}
