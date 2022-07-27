@@ -22,12 +22,12 @@ class App extends Component {
     }
     if (selectedCurrency) {
       this.props.dispatch(currencyActions.setCurrency(selectedCurrency));
-    }
+    } 
   }
 
   render() {
     return (
-      <>
+      <div>
         <NavBar />
         <Routes>
           <Route path="/" element={<Category />} />
@@ -35,7 +35,7 @@ class App extends Component {
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
-      </>
+      </ div>
     );
   }
 }
