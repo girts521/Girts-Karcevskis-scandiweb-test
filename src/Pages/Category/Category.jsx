@@ -16,6 +16,13 @@ class Category extends Component {
     };
   }
 
+  componentDidMount(){
+    window.onscroll = () => {
+      console.log('on scroll')
+      return
+    }
+  }
+
   setNotification(state, text) {
     this.setState({ notification: state, notificationText: text });
   }

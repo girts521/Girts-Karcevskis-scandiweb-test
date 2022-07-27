@@ -21,7 +21,7 @@ class Product extends Component {
       attributes: [],
       defaultAttributes: [],
       showNotification: false,
-      missingAttribute: false,
+      missingAttribute: false, 
       outOfStock: false
     };
   }
@@ -60,7 +60,6 @@ class Product extends Component {
         quantity: 1,
       })
     );
-    this.setState({ attributes: [] });
     this.setState({ showNotification: true });
     setTimeout(() => {
       this.setState({ showNotification: false });
@@ -87,6 +86,7 @@ class Product extends Component {
         children[i].style = style;
       }
     }
+
     let attr;
     if (e.target.innerText === "") {
       attr = {
@@ -107,11 +107,15 @@ class Product extends Component {
         (item) => item.attrName === attr.attrName
       );
       if (!foundAttr) {
-        this.state.attributes.push(attr);
+        const attributeArray = [...this.state.attributes]
+        attributeArray.push(attr);
+        this.setState({attributes: attributeArray})
       } else {
         const index = this.state.attributes.indexOf(foundAttr);
-        this.state.attributes.splice(index, 1);
-        this.state.attributes.push(attr);
+        const attributeArray = [...this.state.attributes]
+        attributeArray.splice(index, 1);
+        attributeArray.push(attr);
+        this.setState({attributes: attributeArray})
       }
     }
   }

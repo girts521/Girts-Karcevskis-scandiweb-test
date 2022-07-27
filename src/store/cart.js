@@ -29,7 +29,7 @@ const cartSlice = createSlice({
     },
 
     addToCart(state, action) {
-      if (!state.cart.length) {
+      if (!state.cart.length) { 
         state.cart.push(action.payload);
         const cartStr = JSON.stringify(state.cart);
         localStorage.setItem("cart", cartStr);
