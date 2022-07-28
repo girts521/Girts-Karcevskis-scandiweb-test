@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { cartActions } from "./store/cart";
 import { currencyActions } from "./store/currency";
 import { mapStateToProps } from "./store/index";
+import {WithRouter} from "./utils/withRouter"
 
 class App extends Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class App extends Component {
     }
     if (selectedCurrency) {
       this.props.dispatch(currencyActions.setCurrency(selectedCurrency));
-    } 
+    }
   }
 
   render() {
@@ -35,7 +36,7 @@ class App extends Component {
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
-      </ div>
+      </div>
     );
   }
 }

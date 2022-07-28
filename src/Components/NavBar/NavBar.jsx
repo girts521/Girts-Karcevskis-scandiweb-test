@@ -36,6 +36,11 @@ class NavBar extends Component {
       const itemCount = data.prices.length;
       this.setState({ itemCount: itemCount });
     }
+
+    if(prevState.cartOpened && prevProps.location.pathname !== this.props.location.pathname){
+      this.setState({cartOpened: false})
+    }
+
   }
 
   openCloseCart() {
