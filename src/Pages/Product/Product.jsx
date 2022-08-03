@@ -1,6 +1,6 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
-import { gql } from "apollo-boost";
+import { cartItemGQL } from "../../utils/gql";
 import { Query } from "@apollo/client/react/components";
 import { WithRouter } from "../../utils/withRouter";
 import parse from "html-react-parser";
@@ -21,8 +21,8 @@ class Product extends Component {
       attributes: [],
       defaultAttributes: [],
       showNotification: false,
-      missingAttribute: false, 
-      outOfStock: false
+      missingAttribute: false,
+      outOfStock: false,
     };
   }
 
@@ -32,15 +32,15 @@ class Product extends Component {
 
   addToCart(length, inStock) {
     if (inStock === false) {
-      this.setState({outOfStock: true})
+      this.setState({ outOfStock: true });
       setTimeout(() => {
         this.setState({ outOfStock: false });
       }, 3000);
-      return
-    };
+      return;
+    }
     if (
-      this.state.attributes.length &&
-      this.state.attributes.length !== length ||
+      (this.state.attributes.length &&
+        this.state.attributes.length !== length) ||
       this.state.attributes.length === 0
     ) {
       this.setState({ missingAttribute: true });
@@ -50,8 +50,7 @@ class Product extends Component {
       return;
     }
 
-    const attributes = this.state.attributes
-    // console.log('attributes when adding to cart:', attributes)
+    const attributes = this.state.attributes;
 
     this.props.dispatch(
       cartActions.addToCart({
@@ -108,15 +107,15 @@ class Product extends Component {
         (item) => item.attrName === attr.attrName
       );
       if (!foundAttr) {
-        const attributeArray = [...this.state.attributes]
+        const attributeArray = [...this.state.attributes];
         attributeArray.push(attr);
-        this.setState({attributes: attributeArray})
+        this.setState({ attributes: attributeArray });
       } else {
         const index = this.state.attributes.indexOf(foundAttr);
-        const attributeArray = [...this.state.attributes]
+        const attributeArray = [...this.state.attributes];
         attributeArray.splice(index, 1);
         attributeArray.push(attr);
-        this.setState({attributes: attributeArray})
+        this.setState({ attributes: attributeArray });
       }
     }
   }
@@ -138,33 +137,8 @@ class Product extends Component {
           <Notification text={"Please select all attributes"} />
         )}
 
-        <Query
-          query={gql`
-            query {
-              product(id: "${this.props.params.productId}") {
-                name
-                inStock
-                gallery
-                description
-                attributes {
-                  name
-                  type
-                  items {
-                    displayValue
-                    value
-                  }
-                }
-                brand
-                prices {
-                  currency {
-                    label
-                    symbol
-                  }
-                  amount
-                }
-              }
-            }
-          `}
+        <Query 
+        query={cartItemGQL(this.props.params.productId)}
         >
           {({ loading, data }) => {
             if (loading) return <Loading size={"30%"} />;
@@ -172,7 +146,7 @@ class Product extends Component {
               return (
                 <>
                   <div className={styles.sideImages}>
-                    {data.product.gallery.map((photo) => { 
+                    {data.product.gallery.map((photo) => {
                       return (
                         <img
                           key={photo}
@@ -194,7 +168,7 @@ class Product extends Component {
                       <h1>{data.product.brand}</h1>
                       <h2>{data.product.name}</h2>
 
-                      {data.product.attributes && 
+                      {data.product.attributes &&
                         data.product.attributes.map((attr) => {
                           if (attr.type === "text") {
                             return (
@@ -232,14 +206,6 @@ class Product extends Component {
 
                       <GreenBtn
                         func={() => {
-                          // const defaultAttributes = [];
-                          // data.product.attributes.forEach((attr) => {
-                          //   defaultAttributes.push({
-                          //     attrName: attr.name,
-                          //     attrValue: attr.items[0].value,
-                          //     attrType: attr.type,
-                          //   });
-                          // });
                           this.addToCart(
                             data.product.attributes.length,
                             data.product.inStock

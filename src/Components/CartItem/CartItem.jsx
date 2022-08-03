@@ -2,7 +2,7 @@ import { Component } from "react";
 import styles from "./styles.module.scss";
 import Attribute from "../Attribute/Attribute";
 import Loading from "../Loading/Loading";
-import { gql } from "apollo-boost";
+import {cartItemGQL} from "../../utils/gql"
 import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
 import { mapStateToProps } from "../../store/index";
@@ -42,33 +42,11 @@ class CartItem extends Component {
   }
 
   render() {
+    console.log(cartItemGQL(this.props.product.productId))
     return (
       <div className={styles.cartItem}>
         <Query
-          query={gql`
-            query {
-              product(id: "${this.props.product.productId}") {
-                name
-                brand 
-                gallery
-                attributes {
-                  name
-                  type
-                  items {
-                    displayValue
-                    value
-                  }
-                }
-                prices {
-                  currency {
-                    label
-                    symbol
-                  }
-                  amount
-                }
-              }
-            }
-          `}
+          query={cartItemGQL(this.props.product.productId)}
         >
           {({ loading, data }) => {
             if (loading) return <Loading />;

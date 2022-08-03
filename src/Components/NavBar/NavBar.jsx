@@ -5,7 +5,7 @@ import { WithRouter } from "../../utils/withRouter";
 import { connect } from "react-redux";
 import { currencyActions } from "../../store/currency";
 import { mapStateToProps } from "../../store/index";
-import { gql } from "apollo-boost";
+import {currencyGQL} from "../../utils/gql"
 import { Query } from "@apollo/client/react/components";
 import Loading from "../Loading/Loading";
 import { updateAllPrices } from "../../utils/allPrices";
@@ -151,14 +151,7 @@ class NavBar extends Component {
 
         <div className={styles.rightNav}>
           <Query
-            query={gql`
-              query {
-                currencies {
-                  label
-                  symbol
-                }
-              }
-            `}
+            query={currencyGQL}
           >
             {({ loading, data }) => {
               if (loading) return <Loading />;

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
-import { gql } from "apollo-boost";
+import {cartItemGQL} from "../../utils/gql"
 import { Query } from "@apollo/client/react/components";
 import Attribute from "../Attribute/Attribute";
 import { connect } from "react-redux";
@@ -22,30 +22,7 @@ class CartOverlayItem extends Component {
     return (
       <div className={styles.container}>
         <Query
-          query={gql`
-            query {
-              product(id: "${this.props.product.productId}") {
-                name
-                brand 
-                gallery
-                attributes {
-                  name
-                  type
-                  items {
-                    displayValue
-                    value
-                  }
-                }
-                prices {
-                  currency {
-                    label
-                    symbol
-                  }
-                  amount
-                }
-              }
-            }
-          `}
+          query={cartItemGQL(this.props.product.productId)}
         >
           {({ loading, data }) => {
             if (loading) return <Loading />;
