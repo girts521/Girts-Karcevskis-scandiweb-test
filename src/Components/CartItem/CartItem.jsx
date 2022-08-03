@@ -19,6 +19,10 @@ class CartItem extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log(this.props.product.attributes);
+  }
+
   changeQuantity(action) {
     this.props.dispatch(
       cartActions.changeQuantity({
@@ -47,6 +51,14 @@ class CartItem extends Component {
                 name
                 brand 
                 gallery
+                attributes {
+                  name
+                  type
+                  items {
+                    displayValue
+                    value
+                  }
+                }
                 prices {
                   currency {
                     label
@@ -74,43 +86,85 @@ class CartItem extends Component {
                     </div>
 
                     {/* it does repeat between cart overlay item and this, so could be made into a seperate component */}
-                    {this.props.product.attributes.length &&
-                      this.props.product.attributes.map((attr) => {
-                        if (attr.attrType === "text") {
-                          return (
-                            <div
-                              key={attr.attrValue + Math.random()}
-                              className={styles.attribute}
-                            >
-                              <Attribute
-                                text
-                                name={attr.attrName}
-                                items={[
-                                  {
-                                    value: attr.attrValue,
-                                    displayValue: attr.attrValue,
-                                  },
-                                ]}
-                              />
-                            </div>
-                          );
-                        }
-                        if (attr.attrType === "swatch") {
-                          return (
+
+                    {data.product.attributes.map((attr) => {
+                      if (attr.type === "text") {
+                        const attributes = [];
+                        attr.items.forEach((item) => {
+                          for (
+                            let i = 0;
+                            i < this.props.product.attributes.length;
+                            i++
+                          ) {
+                            if (
+                              item.value ===
+                              this.props.product.attributes[i].attrValue
+                            ) {
+                              attributes.push({
+                                value: item.value,
+                                displayValue: item.displayValue,
+                                selected: true,
+                              });
+                              return;
+                            }
+                          }
+                          attributes.push({
+                            value: item.value,
+                            displayValue: item.displayValue,
+                          });
+                        });
+                        return (
+                          <div
+                            key={attr.name + Math.random()}
+                            className={styles.attribute}
+                          >
                             <Attribute
-                              key={attr.attrValue + Math.random()}
-                              swatch
-                              name={attr.attrName}
-                              items={[
-                                {
-                                  value: attr.attrValue,
-                                  displayValue: attr.attrValue,
-                                },
-                              ]}
+                              text
+                              name={attr.name}
+                              items={attributes}
                             />
-                          );
-                        }
-                      })}
+                          </div>
+                        );
+                      }
+                      if (attr.type === "swatch") {
+                        const attributes = [];
+                        attr.items.forEach((item) => {
+                          for (
+                            let i = 0;
+                            i < this.props.product.attributes.length;
+                            i++
+                          ) {
+                            if (
+                              item.value ===
+                              this.props.product.attributes[i].attrValue
+                            ) {
+                              attributes.push({
+                                value: item.value,
+                                displayValue: item.displayValue,
+                                selected: true,
+                              });
+                              return;
+                            }
+                          }
+                          attributes.push({
+                            value: item.value,
+                            displayValue: item.displayValue,
+                          });
+                        });
+                        return (
+                          <div
+                            key={attr.name + Math.random()}
+                            className={styles.attribute}
+                          >
+                            <Attribute
+                              swatch
+                              name={attr.name}
+                              items={attributes}
+                            />
+                          </div>
+                        );
+                      }
+                    })}
                   </div>
 
                   <div className={styles.productImg}>
