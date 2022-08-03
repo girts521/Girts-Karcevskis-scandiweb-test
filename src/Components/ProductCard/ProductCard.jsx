@@ -13,6 +13,10 @@ class ProductCard extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log(this.props.product.inStock)
+  }
+
   showCart() {
     this.setState({ cartVisible: true });
   }
@@ -79,7 +83,7 @@ class ProductCard extends Component {
           </p>
         </div>
 
-        {this.state.cartVisible && !this.props.outOfStock && (
+        {this.state.cartVisible && this.props.product.inStock && (
           <>
             <div id="cart" className={styles.cartIcon}>
               <svg

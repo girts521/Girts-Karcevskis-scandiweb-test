@@ -18,6 +18,10 @@ class CartOverlayItem extends Component {
     );
   }
 
+  componentDidMount(){
+    console.log(this.props.product.attributes)
+  }
+
   render() {
     return (
       <div className={styles.container}>
@@ -28,6 +32,14 @@ class CartOverlayItem extends Component {
                 name
                 brand 
                 gallery
+                attributes {
+                  name
+                  type
+                  items {
+                    displayValue
+                    value
+                  }
+                }
                 prices {
                   currency {
                     label
@@ -42,6 +54,7 @@ class CartOverlayItem extends Component {
           {({ loading, data }) => {
             if (loading) return <Loading />;
             if (data.product) {
+              // console.log(data.product)
               return (
                 <>
                   <div className={styles.productsInfo}>
@@ -54,7 +67,36 @@ class CartOverlayItem extends Component {
                         data.product.prices[this.props.selectedCurrency].amount}
                     </h4>
 
-                    {this.props.product.attributes.length &&
+                    {data.product.attributes.map((attr) => {
+                      if(attr.type === 'text'){
+                        const attributes =  []
+                       attr.items.forEach((item) => {
+                          attributes.push({value: item.value,
+                            displayValue: item.displayValue}) 
+                        })
+                        return (
+                          <div key={attr.name + Math.random()} className={styles.attribute}>
+                            <Attribute text name={attr.name} items={attributes}/>
+                          </div> 
+                        )
+                      }
+                      if(attr.type === 'swatch'){
+                        const attributes =  []
+                        attr.items.forEach((item) => {
+                          attributes.push({
+                            value: item.value,
+                            displayValue: item.displayValue
+                          })
+                        })
+                        return (
+                          <div key={attr.name + Math.random()} className={styles.attribute}>
+                          <Attribute swatch name={attr.name} items={attributes}/>
+                          </div>
+                        )
+                      }
+                    })}
+
+                    {/* {this.props.product.attributes.length &&
                       this.props.product.attributes.map((attr) => {
                         if (attr.attrType === "text") {
                           return (
@@ -90,7 +132,7 @@ class CartOverlayItem extends Component {
                             />
                           );
                         }
-                      })}
+                      })} */}
                   </div>
 
                   <div className={styles.productsImg}>

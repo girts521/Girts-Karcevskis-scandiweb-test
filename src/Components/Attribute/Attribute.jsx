@@ -2,6 +2,7 @@ import { Component } from "react";
 import styles from "./styles.module.scss";
 
 class Attribute extends Component {
+
   render() {
     return (
       <div className={styles.container}>
@@ -11,7 +12,7 @@ class Attribute extends Component {
             this.props.items.map((item) => {
               return (
                 <div onClick={this.props.func} key={item.value}>
-                  {item.displayValue}
+                  {item.value}
                 </div>
               );
             })}
