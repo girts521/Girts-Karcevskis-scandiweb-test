@@ -19,10 +19,6 @@ class CartItem extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.props.product.attributes);
-  }
-
   changeQuantity(action) {
     this.props.dispatch(
       cartActions.changeQuantity({
@@ -42,7 +38,6 @@ class CartItem extends Component {
   }
 
   render() {
-    console.log(cartItemGQL(this.props.product.productId))
     return (
       <div className={styles.cartItem}>
         <Query

@@ -7,6 +7,8 @@ import { currencyActions } from "../../store/currency";
 import { mapStateToProps } from "../../store/index";
 import {currencyGQL} from "../../utils/gql"
 import { Query } from "@apollo/client/react/components";
+import { gql } from "apollo-boost";
+import { client } from "../../Apollo";
 import Loading from "../Loading/Loading";
 import { updateAllPrices } from "../../utils/allPrices";
 
@@ -18,6 +20,7 @@ class NavBar extends Component {
       currencySelected: "$",
       cartOpened: false,
       itemCount: 0,
+      categories: [],
     };
   }
 
@@ -27,6 +30,27 @@ class NavBar extends Component {
     const data = await updateAllPrices(cart, index);
     const itemCount = data.prices.length;
     this.setState({ itemCount: itemCount });
+
+    const categoriesData = await client.query({
+      query: gql`
+      query {
+          categories{
+           name
+         }
+         
+      }
+    `
+    })
+
+    if(categoriesData.loading === false){
+     const categories = []
+     categoriesData.data.categories.forEach((category) => {
+      categories.push(category.name)
+     })
+
+     this.setState({categories: categories})
+    }
+
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -94,9 +118,11 @@ class NavBar extends Component {
           ></div>
         )}
         <div className={styles.leftNav}>
-          <div onClick={this.navigateTo.bind(this)}>ALL</div>
-          <div onClick={this.navigateTo.bind(this)}>TECH</div>
-          <div onClick={this.navigateTo.bind(this)}>CLOTHES</div>
+          {this.state.categories.map((category) => {
+            return(
+              <div key={category} onClick={this.navigateTo.bind(this)}>{category.toLocaleUpperCase()}</div>
+            )
+          })}
         </div>
 
         <div className={styles.logo}>
