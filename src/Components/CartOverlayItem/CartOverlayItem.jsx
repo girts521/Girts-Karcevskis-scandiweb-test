@@ -18,10 +18,6 @@ class CartOverlayItem extends Component {
     );
   }
 
-  componentDidMount(){
-    console.log(this.props.product.attributes)
-  }
-
   render() {
     return (
       <div className={styles.container}>
@@ -54,7 +50,6 @@ class CartOverlayItem extends Component {
           {({ loading, data }) => {
             if (loading) return <Loading />;
             if (data.product) {
-              // console.log(data.product)
               return (
                 <>
                   <div className={styles.productsInfo}>
@@ -68,31 +63,69 @@ class CartOverlayItem extends Component {
                     </h4>
 
                     {data.product.attributes.map((attr) => {
-                      if(attr.type === 'text'){
-                        const attributes =  []
-                       attr.items.forEach((item) => {
-                          attributes.push({value: item.value,
-                            displayValue: item.displayValue}) 
-                        })
-                        return (
-                          <div key={attr.name + Math.random()} className={styles.attribute}>
-                            <Attribute text name={attr.name} items={attributes}/>
-                          </div> 
-                        )
-                      }
-                      if(attr.type === 'swatch'){
-                        const attributes =  []
+                      if (attr.type === "text") {
+                        const attributes = [];
                         attr.items.forEach((item) => {
+                          
+                          for (let i = 0; i < this.props.product.attributes.length; i++){
+                            if(item.value === this.props.product.attributes[i].attrValue){
+                              attributes.push({
+                                value: item.value,
+                                displayValue: item.displayValue,
+                                selected: true
+                              });
+                              return
+                            }
+
+                          }
                           attributes.push({
                             value: item.value,
-                            displayValue: item.displayValue
-                          })
-                        })
+                            displayValue: item.displayValue,
+                          });
+                        });
                         return (
-                          <div key={attr.name + Math.random()} className={styles.attribute}>
-                          <Attribute swatch name={attr.name} items={attributes}/>
+                          <div
+                            key={attr.name + Math.random()}
+                            className={styles.attribute}
+                          >
+                            <Attribute
+                              text
+                              name={attr.name}
+                              items={attributes}
+                            />
                           </div>
-                        )
+                        );
+                      }
+                      if (attr.type === "swatch") {
+                        const attributes = [];
+                        attr.items.forEach((item) => {
+                          for (let i = 0; i < this.props.product.attributes.length; i++){
+                            if(item.value === this.props.product.attributes[i].attrValue){
+                              attributes.push({
+                                value: item.value,
+                                displayValue: item.displayValue,
+                                selected: true
+                              });
+                              return
+                            }
+                          }
+                          attributes.push({
+                            value: item.value,
+                            displayValue: item.displayValue,
+                          });
+                        });
+                        return (
+                          <div
+                            key={attr.name + Math.random()}
+                            className={styles.attribute}
+                          >
+                            <Attribute
+                              swatch
+                              name={attr.name}
+                              items={attributes}
+                            />
+                          </div>
+                        );
                       }
                     })}
 

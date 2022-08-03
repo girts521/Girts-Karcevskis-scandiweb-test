@@ -51,6 +51,7 @@ class Product extends Component {
     }
 
     const attributes = this.state.attributes
+    // console.log('attributes when adding to cart:', attributes)
 
     this.props.dispatch(
       cartActions.addToCart({
@@ -193,7 +194,7 @@ class Product extends Component {
                       <h1>{data.product.brand}</h1>
                       <h2>{data.product.name}</h2>
 
-                      {data.product.attributes &&
+                      {data.product.attributes && 
                         data.product.attributes.map((attr) => {
                           if (attr.type === "text") {
                             return (

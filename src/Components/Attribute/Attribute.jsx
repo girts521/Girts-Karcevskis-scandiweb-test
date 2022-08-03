@@ -2,7 +2,6 @@ import { Component } from "react";
 import styles from "./styles.module.scss";
 
 class Attribute extends Component {
-
   render() {
     return (
       <div className={styles.container}>
@@ -11,7 +10,11 @@ class Attribute extends Component {
           {this.props.text &&
             this.props.items.map((item) => {
               return (
-                <div onClick={this.props.func} key={item.value}>
+                <div
+                  className={item.selected && styles.selected}
+                  onClick={this.props.func}
+                  key={item.value}
+                >
                   {item.value}
                 </div>
               );
@@ -21,6 +24,7 @@ class Attribute extends Component {
             this.props.items.map((item) => {
               return (
                 <div
+                  className={item.selected && styles.selected}
                   onClick={(e) => {
                     this.props.func(e, item.value);
                   }}
