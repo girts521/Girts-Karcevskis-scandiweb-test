@@ -133,3 +133,12 @@ table {
 .no-scroll {
   overflow: hidden;
 }
+
+.selectedTextAttribute{
+  background-color: black; 
+  color: white;
+}
+
+.selectedSwatchAttribute{
+  border: 1px solid rgba(94, 206, 123, 1) !important;
+}

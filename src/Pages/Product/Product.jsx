@@ -68,22 +68,16 @@ class Product extends Component {
 
   selectedAttr(e, selectedAttr) {
     const children = e.target.parentNode.children;
-    let style = "";
 
     if (e.target.innerText.length > 0) {
-      e.target.style = "background-color: black; color: white";
+     e.target.classList.add("selectedTextAttribute")
     } else if (e.target.innerText === "") {
-      style = `background-color: ${e.target.style.backgroundColor};`;
-      e.target.style = `${style}; border: 1px solid rgba(94, 206, 123, 1)`;
+      e.target.classList.add("selectedSwatchAttribute")
     }
 
     for (let i = 0; i < children.length; i++) {
       if (children[i] != e.target) {
-        style =
-          e.target.innerText === ""
-            ? `background-color: ${children[i].style.backgroundColor}`
-            : "";
-        children[i].style = style;
+        children[i].classList.remove("selectedTextAttribute", "selectedSwatchAttribute")
       }
     }
 
