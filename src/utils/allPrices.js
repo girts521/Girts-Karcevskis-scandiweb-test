@@ -1,5 +1,6 @@
 import { gql } from "apollo-boost";
 import { client } from "../Apollo";
+import {pricesGQL} from "../utils/gql"
 
 export const allPrices = async (products, index, newPrices) => {
   let prices = [];
@@ -13,19 +14,7 @@ export const allPrices = async (products, index, newPrices) => {
       return prices;
     }
     const product = products.pop();
-    const query = gql`
-    query {
-        product(id: "${product.id}"){
-          prices{
-            currency{
-              label
-              symbol
-            }
-            amount
-          }
-        }
-      }
-    `;
+    const query = pricesGQL;
 
     const res = await client.query({ query });
     const price = res.data.product.prices[index].amount;

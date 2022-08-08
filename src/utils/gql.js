@@ -29,11 +29,8 @@ export const cartItemGQL = (id) => {
   `;
 };
 
-            // cartItemGQL(this.props.params.productId)}
-
-
 export const categoryGQL = (title) => {
- return gql`
+  return gql`
             query {
               category(input: { title: "${title}" }) {
                 name
@@ -71,3 +68,25 @@ export const currencyGQL = gql`
     }
   }
 `;
+
+export const caregoriesGQL = gql`
+  query {
+    categories {
+      name
+    }
+  }
+`;
+
+export const pricesGQL = gql`
+query {
+    product(id: "${product.id}"){
+      prices{
+        currency{
+          label
+          symbol
+        }
+        amount
+      }
+    }
+  }
+`

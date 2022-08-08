@@ -70,14 +70,17 @@ class Product extends Component {
     const children = e.target.parentNode.children;
 
     if (e.target.innerText.length > 0) {
-     e.target.classList.add("selectedTextAttribute")
+      e.target.classList.add("selectedTextAttribute");
     } else if (e.target.innerText === "") {
-      e.target.classList.add("selectedSwatchAttribute")
+      e.target.classList.add("selectedSwatchAttribute");
     }
 
     for (let i = 0; i < children.length; i++) {
       if (children[i] != e.target) {
-        children[i].classList.remove("selectedTextAttribute", "selectedSwatchAttribute")
+        children[i].classList.remove(
+          "selectedTextAttribute",
+          "selectedSwatchAttribute"
+        );
       }
     }
 
@@ -131,9 +134,7 @@ class Product extends Component {
           <Notification text={"Please select all attributes"} />
         )}
 
-        <Query 
-        query={cartItemGQL(this.props.params.productId)}
-        >
+        <Query query={cartItemGQL(this.props.params.productId)}>
           {({ loading, data }) => {
             if (loading) return <Loading size={"30%"} />;
             if (data.product) {

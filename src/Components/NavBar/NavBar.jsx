@@ -5,9 +5,8 @@ import { WithRouter } from "../../utils/withRouter";
 import { connect } from "react-redux";
 import { currencyActions } from "../../store/currency";
 import { mapStateToProps } from "../../store/index";
-import {currencyGQL} from "../../utils/gql"
+import { currencyGQL, caregoriesGQL } from "../../utils/gql";
 import { Query } from "@apollo/client/react/components";
-import { gql } from "apollo-boost";
 import { client } from "../../Apollo";
 import Loading from "../Loading/Loading";
 import { updateAllPrices } from "../../utils/allPrices";
@@ -32,25 +31,17 @@ class NavBar extends Component {
     this.setState({ itemCount: itemCount });
 
     const categoriesData = await client.query({
-      query: gql`
-      query {
-          categories{
-           name
-         }
-         
-      }
-    `
-    })
+      query: caregoriesGQL,
+    });
 
-    if(categoriesData.loading === false){
-     const categories = []
-     categoriesData.data.categories.forEach((category) => {
-      categories.push(category.name)
-     })
+    if (categoriesData.loading === false) {
+      const categories = [];
+      categoriesData.data.categories.forEach((category) => {
+        categories.push(category.name);
+      });
 
-     this.setState({categories: categories})
+      this.setState({ categories: categories });
     }
-
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -61,10 +52,12 @@ class NavBar extends Component {
       this.setState({ itemCount: itemCount });
     }
 
-    if(prevState.cartOpened && prevProps.location.pathname !== this.props.location.pathname){
-      this.setState({cartOpened: false})
+    if (
+      prevState.cartOpened &&
+      prevProps.location.pathname !== this.props.location.pathname
+    ) {
+      this.setState({ cartOpened: false });
     }
-
   }
 
   openCloseCart() {
@@ -119,9 +112,11 @@ class NavBar extends Component {
         )}
         <div className={styles.leftNav}>
           {this.state.categories.map((category) => {
-            return(
-              <div key={category} onClick={this.navigateTo.bind(this)}>{category.toLocaleUpperCase()}</div>
-            )
+            return (
+              <div key={category} onClick={this.navigateTo.bind(this)}>
+                {category.toLocaleUpperCase()}
+              </div>
+            );
           })}
         </div>
 
@@ -176,9 +171,7 @@ class NavBar extends Component {
         </div>
 
         <div className={styles.rightNav}>
-          <Query
-            query={currencyGQL}
-          >
+          <Query query={currencyGQL}>
             {({ loading, data }) => {
               if (loading) return <Loading />;
               if (data.currencies) {

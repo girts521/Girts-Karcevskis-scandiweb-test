@@ -14,8 +14,8 @@
     align-items: center;
     height: 100%;
     overflow: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     img {
       width: 80px;
       margin-bottom: 40px;
@@ -23,11 +23,9 @@
       cursor: pointer;
     }
   }
-      // Chrome, Safari and Opera
-      .sideImages::-webkit-scrollbar {
-        display: none; 
-      }
-  
+  .sideImages::-webkit-scrollbar {
+    display: none;
+  }
 
   .infoContainer {
     display: flex;

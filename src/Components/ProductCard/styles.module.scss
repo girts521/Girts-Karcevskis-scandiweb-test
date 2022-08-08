@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  .image{
+  .image {
     height: 79%;
     width: 100%;
     display: flex;
@@ -22,7 +22,6 @@
       margin-bottom: 0;
     }
   }
-
 
   .text {
     margin-left: 15px;
@@ -94,4 +93,3 @@
     font-weight: 500;
   }
 }
-

@@ -13,17 +13,13 @@ class ProductCard extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.props.product.inStock)
-  }
-
   showCart() {
     this.setState({ cartVisible: true });
   }
 
   hideCart() {
     this.setState({ cartVisible: false });
-  } 
+  }
 
   navigateToProduct(e) {
     if (e.target.parentNode.id && e.target.parentNode.id === "cart") {
@@ -70,10 +66,15 @@ class ProductCard extends Component {
         )}
         {this.props.discount && (
           <div className={styles.discount}>{this.props.discount}</div>
-        )} 
-       <div className={styles.image}> <img src={this.props.product.gallery[0]} alt="" /></div>
+        )}
+        <div className={styles.image}>
+          {" "}
+          <img src={this.props.product.gallery[0]} alt="" />
+        </div>
         <div className={styles.text}>
-          <p className={styles.name}>{this.props.product.brand}  {this.props.product.name}</p>
+          <p className={styles.name}>
+            {this.props.product.brand} {this.props.product.name}
+          </p>
 
           <p className={styles.price}>
             {`${

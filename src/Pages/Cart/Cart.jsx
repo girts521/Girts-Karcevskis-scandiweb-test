@@ -4,7 +4,6 @@ import CartItem from "../../Components/CartItem/CartItem";
 import GreenBtn from "../../Components/GreenBtn/GreenBtn";
 import { connect } from "react-redux";
 import { mapStateToProps } from "../../store/index";
-import Notification from "../../Components/Notification/Notification";
 import Loading from "../../Components/Loading/Loading";
 import PriceSummary from "../../Components/PriceSummary/PriceSummary";
 
@@ -35,37 +34,37 @@ class Cart extends Component {
   render() {
     return (
       <>
-        {this.state.isEmpty && (
-          <Notification
-            text={
-              "Sorry, but the cart is empty. Feel free to browse our products :)"
-            }
-          />
-        )}
-
         <div className={styles.container}>
-          <h1>Cart</h1>
+          {this.state.isEmpty ? (
+            <h1>
+              Sorry, but the cart is empty. Feel free to browse our products.
+            </h1>
+          ) : (
+            <>
+              <h1>Cart</h1>
 
-          <div className={styles.productsContaner}>
-            {this.props.cart ? (
-              this.props.cart.map((item) => {
-                return (
-                  <CartItem
-                    key={item.productId + Math.random()}
-                    product={item}
-                  />
-                );
-              })
-            ) : (
-              <Loading />
-            )}
-          </div>
+              <div className={styles.productsContaner}>
+                {this.props.cart ? (
+                  this.props.cart.map((item) => {
+                    return (
+                      <CartItem
+                        key={item.productId + Math.random()}
+                        product={item}
+                      />
+                    );
+                  })
+                ) : (
+                  <Loading />
+                )}
+              </div>
 
-          {!this.state.isEmpty && (
-            <div className={styles.cartSummary}>
-              <PriceSummary />
-              <GreenBtn text={"ORDER"} />
-            </div>
+              {!this.state.isEmpty && (
+                <div className={styles.cartSummary}>
+                  <PriceSummary />
+                  <GreenBtn text={"ORDER"} />
+                </div>
+              )}
+            </>
           )}
         </div>
       </>

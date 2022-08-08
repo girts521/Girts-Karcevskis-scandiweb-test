@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import { cartActions } from "./store/cart";
 import { currencyActions } from "./store/currency";
 import { mapStateToProps } from "./store/index";
-import {WithRouter} from "./utils/withRouter"
 
 class App extends Component {
   componentDidMount() {

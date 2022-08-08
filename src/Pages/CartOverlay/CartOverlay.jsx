@@ -19,7 +19,7 @@ class CartOverlay extends Component {
   }
 
   async componentDidMount() {
-    document.body.classList.add('no-scroll')
+    document.body.classList.add("no-scroll");
     const storedCart = this.props.cart;
     this.setState({ cart: storedCart });
     const priceData = await updateAllPrices(
@@ -34,8 +34,8 @@ class CartOverlay extends Component {
     });
   }
 
-  componentWillUnmount(){
-    document.body.classList.remove('no-scroll')
+  componentWillUnmount() {
+    document.body.classList.remove("no-scroll");
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -61,14 +61,20 @@ class CartOverlay extends Component {
       <div className={styles.container}>
         <h1>
           My bag,
-        {this.state.prices.length > 0 && <span> {this.state.prices.length} {this.state.prices.length > 1 ? 'items' : 'item'}</span>}
+          {this.state.prices.length > 0 && (
+            <span>
+              {" "}
+              {this.state.prices.length}{" "}
+              {this.state.prices.length > 1 ? "items" : "item"}
+            </span>
+          )}
         </h1>
 
         <div className={styles.productsContainer}>
           {this.state.cart.length
             ? this.props.cart.map((item) => {
                 return (
-                  <CartOverlayItem 
+                  <CartOverlayItem
                     key={item.productId + Math.random()}
                     product={item}
                   />

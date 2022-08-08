@@ -1,6 +1,6 @@
 import { Component } from "react";
 import styles from "./styles.module.scss";
-import {cartItemGQL} from "../../utils/gql"
+import { cartItemGQL } from "../../utils/gql";
 import { Query } from "@apollo/client/react/components";
 import Attribute from "../Attribute/Attribute";
 import { connect } from "react-redux";
@@ -21,9 +21,7 @@ class CartOverlayItem extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <Query
-          query={cartItemGQL(this.props.product.productId)}
-        >
+        <Query query={cartItemGQL(this.props.product.productId)}>
           {({ loading, data }) => {
             if (loading) return <Loading />;
             if (data.product) {
@@ -43,17 +41,22 @@ class CartOverlayItem extends Component {
                       if (attr.type === "text") {
                         const attributes = [];
                         attr.items.forEach((item) => {
-                          
-                          for (let i = 0; i < this.props.product.attributes.length; i++){
-                            if(item.value === this.props.product.attributes[i].attrValue){
+                          for (
+                            let i = 0;
+                            i < this.props.product.attributes.length;
+                            i++
+                          ) {
+                            if (
+                              item.value ===
+                              this.props.product.attributes[i].attrValue
+                            ) {
                               attributes.push({
                                 value: item.value,
                                 displayValue: item.displayValue,
-                                selected: true
+                                selected: true,
                               });
-                              return
+                              return;
                             }
-
                           }
                           attributes.push({
                             value: item.value,
@@ -76,14 +79,21 @@ class CartOverlayItem extends Component {
                       if (attr.type === "swatch") {
                         const attributes = [];
                         attr.items.forEach((item) => {
-                          for (let i = 0; i < this.props.product.attributes.length; i++){
-                            if(item.value === this.props.product.attributes[i].attrValue){
+                          for (
+                            let i = 0;
+                            i < this.props.product.attributes.length;
+                            i++
+                          ) {
+                            if (
+                              item.value ===
+                              this.props.product.attributes[i].attrValue
+                            ) {
                               attributes.push({
                                 value: item.value,
                                 displayValue: item.displayValue,
-                                selected: true
+                                selected: true,
                               });
-                              return
+                              return;
                             }
                           }
                           attributes.push({
@@ -105,44 +115,6 @@ class CartOverlayItem extends Component {
                         );
                       }
                     })}
-
-                    {/* {this.props.product.attributes.length &&
-                      this.props.product.attributes.map((attr) => {
-                        if (attr.attrType === "text") {
-                          return (
-                            <div
-                              key={attr.attrValue + Math.random()}
-                              className={styles.attribute}
-                            >
-                              <Attribute
-                                text
-                                name={attr.attrName}
-                                items={[
-                                  {
-                                    value: attr.attrValue,
-                                    displayValue: attr.attrValue,
-                                  },
-                                ]}
-                              />
-                            </div>
-                          );
-                        }
-                        if (attr.attrType === "swatch") {
-                          return (
-                            <Attribute
-                              key={attr.attrValue + Math.random()}
-                              swatch
-                              name={attr.attrName}
-                              items={[
-                                {
-                                  value: attr.attrValue,
-                                  displayValue: attr.attrValue,
-                                },
-                              ]}
-                            />
-                          );
-                        }
-                      })} */}
                   </div>
 
                   <div className={styles.productsImg}>
