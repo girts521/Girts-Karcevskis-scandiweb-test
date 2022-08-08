@@ -62,7 +62,7 @@ class Cart extends Component {
                 <div className={styles.cartSummary}>
                   <PriceSummary />
                   <GreenBtn text={"ORDER"} />
-                </div>
+                </div> 
               )}
             </>
           )}

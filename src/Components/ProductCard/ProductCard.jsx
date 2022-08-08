@@ -37,6 +37,7 @@ class ProductCard extends Component {
           productId: this.props.product.id,
           attributes: defaultAttributes,
           quantity: 1,
+          prices: this.props.product.prices
         })
       );
       this.props.setNotification(

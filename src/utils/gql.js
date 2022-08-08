@@ -77,16 +77,18 @@ export const caregoriesGQL = gql`
   }
 `;
 
-export const pricesGQL = gql`
-query {
-    product(id: "${product.id}"){
-      prices{
-        currency{
-          label
-          symbol
+export const pricesGQL = (id) => {
+ return gql`
+  query {
+      product(id: "${id}"){
+        prices{
+          currency{
+            label
+            symbol
+          }
+          amount
         }
-        amount
       }
     }
-  }
-`
+  `
+}

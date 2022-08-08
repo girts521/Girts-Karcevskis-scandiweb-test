@@ -30,7 +30,7 @@ class Product extends Component {
     this.setState({ mainPhoto: e.target.src });
   }
 
-  addToCart(length, inStock) {
+  addToCart(length, inStock, prices) {
     if (inStock === false) {
       this.setState({ outOfStock: true });
       setTimeout(() => {
@@ -58,6 +58,7 @@ class Product extends Component {
         productId: this.props.params.productId,
         attributes: attributes,
         quantity: 1,
+        prices
       })
     );
     this.setState({ showNotification: true });
@@ -203,7 +204,8 @@ class Product extends Component {
                         func={() => {
                           this.addToCart(
                             data.product.attributes.length,
-                            data.product.inStock
+                            data.product.inStock,
+                            data.product.prices
                           );
                         }}
                         text={"ADD TO CART"}
