@@ -16,8 +16,8 @@ class PriceSummary extends Component {
     };
   }
 
-  async componentDidMount() {
-    priceData = await updateAllPrices(
+   componentDidMount() {
+    priceData = updateAllPrices(
       this.props.cart,
       this.props.selectedCurrency
     );
@@ -30,12 +30,12 @@ class PriceSummary extends Component {
     });
   }
 
-  async componentDidUpdate(prevProps, prevState) {
+   componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.selectedCurrency != this.props.selectedCurrency ||
       prevProps.cart != this.props.cart
     ) {
-      priceData = await updateAllPrices(
+      priceData = updateAllPrices(
         this.props.cart,
         this.props.selectedCurrency
       );

@@ -1,10 +1,10 @@
 
 
-export const allPrices = async (products, index, newPrices) => {
+export const allPrices =  (products, index, newPrices) => {
   let prices = [];
   let symbol;
 
-  const recursive = async () => {
+  const recursive =  () => {
     if (newPrices) {
       prices = newPrices;
     }
@@ -17,13 +17,13 @@ export const allPrices = async (products, index, newPrices) => {
     for (let i = 0; i < product.quantity; i++) {
       prices.push(price);
     }
-    await recursive(products, index, prices);
+     recursive(products, index, prices);
   };
-  await recursive();
+   recursive();
   return { prices, symbol };
 };
 
-export const updateAllPrices = async (cart, index) => {
+export const updateAllPrices =  (cart, index) => {
   const products = [];
   cart.forEach((item) => {
     products.push({
@@ -34,7 +34,7 @@ export const updateAllPrices = async (cart, index) => {
   });
 
   try {
-    const data = await allPrices(products, index);
+    const data =  allPrices(products, index);
     return data;
   } catch (e) {
     console.log(e);

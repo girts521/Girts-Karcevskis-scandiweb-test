@@ -18,11 +18,11 @@ class CartOverlay extends Component {
     };
   }
 
-  async componentDidMount() {
+   componentDidMount() {
     document.body.classList.add("no-scroll");
     const storedCart = this.props.cart;
     this.setState({ cart: storedCart });
-    const priceData = await updateAllPrices(
+    const priceData =  updateAllPrices(
       this.props.cart,
       this.props.selectedCurrency
     );
@@ -38,12 +38,12 @@ class CartOverlay extends Component {
     document.body.classList.remove("no-scroll");
   }
 
-  async componentDidUpdate(prevProps, prevState) {
+   componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.selectedCurrency != this.props.selectedCurrency ||
       prevProps.cart != this.props.cart
     ) {
-      const priceData = await updateAllPrices(
+      const priceData = updateAllPrices(
         this.props.cart,
         this.props.selectedCurrency
       );
