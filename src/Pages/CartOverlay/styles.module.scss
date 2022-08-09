@@ -10,6 +10,8 @@
   z-index: 2;
   padding: 32px 16px;
   overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   h1 {
     font-weight: 700;
@@ -83,4 +85,8 @@
       margin: 0;
     }
   }
+}
+
+.container::-webkit-scrollbar {
+  display: none;
 }
