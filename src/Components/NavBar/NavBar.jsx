@@ -26,9 +26,14 @@ class NavBar extends Component {
   async componentDidMount() {
     const index = this.props.selectedCurrency;
     const cart = JSON.parse(localStorage.getItem("cart"));
-    const data = updateAllPrices(cart, index);
-    const itemCount = data.prices.length;
-    this.setState({ itemCount: itemCount });
+    if (cart.length) {
+      const data = updateAllPrices(cart, index);
+      if(data){
+        const itemCount = data.prices.length;
+        this.setState({ itemCount: itemCount });
+      }
+
+    }
 
     const categoriesData = await client.query({
       query: caregoriesGQL,
@@ -44,7 +49,7 @@ class NavBar extends Component {
     }
   }
 
-   componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.cart != this.props.cart) {
       const index = this.props.selectedCurrency;
       const data = updateAllPrices(this.props.cart, index);

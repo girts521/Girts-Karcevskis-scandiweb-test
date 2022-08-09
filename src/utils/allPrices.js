@@ -3,12 +3,19 @@
 export const allPrices =  (products, index, newPrices) => {
   let prices = [];
   let symbol;
+  if(products.length && !products[0].prices){
+    //means that there is an old item in cart without prices being passed
+    //this causes an error and page does not load, thats why I have to clear the cart
+    // only will happen if the item was added before these improvements
+    const cart = localStorage.setItem("cart","[]")
+    return
+  }
 
   const recursive =  () => {
     if (newPrices) {
       prices = newPrices;
     }
-    if (products.length === 0) {
+    if (products.length === 0) { 
       return prices;
     }
     const product = products.pop();

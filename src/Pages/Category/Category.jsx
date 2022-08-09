@@ -21,7 +21,7 @@ class Category extends Component {
   }
 
   render() {
-    const title = this.props.params.categoryName;
+    const title = this.props.params.categoryName || "all"
     return (
       <>
         {this.state.notification && (
