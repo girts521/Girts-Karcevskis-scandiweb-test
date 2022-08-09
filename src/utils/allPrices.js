@@ -11,7 +11,7 @@ export const allPrices =  (products, index, newPrices) => {
     return
   }
 
-  const recursive =  () => {
+  const recursive =  () => { 
     if (newPrices) {
       prices = newPrices;
     }

@@ -26,7 +26,7 @@ class NavBar extends Component {
   async componentDidMount() {
     const index = this.props.selectedCurrency;
     const cart = JSON.parse(localStorage.getItem("cart"));
-    if (cart.length) {
+    if (cart && cart.length) {
       const data = updateAllPrices(cart, index);
       if(data){
         const itemCount = data.prices.length;
